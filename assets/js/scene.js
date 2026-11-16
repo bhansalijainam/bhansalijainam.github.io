@@ -1,350 +1,447 @@
-// A loss landscape with an optimizer on it. The surface is a fixed function
-// f(x, z); the descent path is real gradient descent with momentum on that
-// function, computed once. Scroll position picks how far along the path the
-// optimizer is.
+// 27,000 dots, drawn with plain WebGL (no library).
+//
+// The same dots take three formations as the page scrolls:
+//   A  a stippled portrait        (hero)
+//   B  a stack of four plates     (process: a loose cloud is printed into order, one layer per step)
+//   C  a dotted globe             (contact: land dots, with Jersey City marked)
+// Between formations they disperse and fade, so the reading sections stay clean.
+// Each formation is positioned by an empty "slot" element in the page, so layout
+// stays in CSS.
 
-import * as THREE from './vendor/three.module.min.js';
+const N = 27000;
+const LAYERS = 4;
+const PLATE = 82;           // 82 x 82 sites per plate
+const FOV = (30 * Math.PI) / 180;
+const CAM = 1 / Math.tan(FOV / 2);
+const CITY = { lat: 40.72, lon: -74.04 };
+const DEG = Math.PI / 180;
 
-const SIZE = 46;          // world width of the surface
-const HEIGHT = 1.55;      // vertical exaggeration
-const MIN = { x: 7, z: 6 };
-const START = { x: -15, z: -13.5 };
-const BG = 0x110a22;
+const VERT = `
+precision highp float;
+attribute vec3 aP;
+attribute vec3 aS;
+attribute vec3 aL;
+attribute vec3 aG;
+attribute vec4 aM;
+uniform mat4 uProj;
+uniform vec4 uA;
+uniform vec2 uRA;
+uniform vec2 uFace;
+uniform vec4 uB;
+uniform mat3 uRB;
+uniform vec4 uC;
+uniform mat3 uRC;
+uniform vec3 uForm;
+uniform vec2 uBuild;
+uniform vec4 uEnv;
+uniform vec3 uMouse;
+uniform vec3 uSize;
+varying float vA;
+varying float vT;
+varying float vPx;
+
+vec3 rotY(vec3 p, float a) { float c = cos(a), s = sin(a); return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z); }
+vec3 rotX(vec3 p, float a) { float c = cos(a), s = sin(a); return vec3(p.x, c * p.y - s * p.z, s * p.y + c * p.z); }
+
+void main() {
+  float t = uEnv.x;
+
+  // loose dust: fills the view, drifts, and slides past at different depths on scroll
+  vec3 dust = vec3((aS.x - 0.5) * 2.6 * uEnv.z, (aS.y - 0.5) * 2.6, (aS.z - 0.5) * 1.5);
+  dust.y = mod(dust.y + uEnv.y * (0.25 + aS.z * 0.75) + 1.3, 2.6) - 1.3;
+  dust.x += sin(t * 0.23 + aS.y * 31.0) * 0.035;
+  dust.y += cos(t * 0.19 + aS.x * 27.0) * 0.035;
+
+  // A: portrait. The face resolves first, then the rest; the lower body stays loose.
+  float dFace = distance(aP.xy, uFace);
+  float delayA = 0.40 * smoothstep(0.0, 0.8, dFace) + 0.14 * aS.x;
+  float fA = smoothstep(delayA, delayA + 0.46, uForm.x);
+  vec3 q = vec3(aP.xy, (aP.z - 0.6) * 0.2);
+  float loose = smoothstep(-0.2, -0.5, aP.y);
+  q += (aS - 0.5) * vec3(0.55, 0.3, 0.5) * loose * loose * (0.3 + aS.z) * uA.w;
+  q.xy += 0.0006 * vec2(sin(t * 0.9 + aS.x * 60.0), cos(t * 0.8 + aS.y * 60.0)) * (1.0 + loose * 9.0);
+  q = rotX(rotY(q, uRA.x), uRA.y);
+  vec3 pA = vec3(uA.xy, 0.0) + q * uA.z;
+
+  // B: stack. Unsorted dots hang in a cloud; each step prints one plate, left to right.
+  float delayB = 0.5 * aS.y;
+  float fB = smoothstep(delayB, delayB + 0.5, uForm.y);
+  float layer = aL.y;
+  float start = layer * 0.25 + (aL.x + 0.5) * 0.10;
+  float tb = smoothstep(start, start + 0.12, uBuild.x);
+  float gap = mix(0.30, 0.075, uBuild.y);
+  vec3 site = vec3(aL.x, (layer - 1.5) * gap, aL.z);
+  float gr1 = sqrt(-2.0 * log(max(aS.x, 0.0002)));
+  float gr2 = sqrt(-2.0 * log(max(aS.z, 0.0002)));
+  vec3 box = vec3(gr1 * cos(6.2832 * aS.y), gr2 * cos(6.2832 * fract(aS.x * 91.7 + aS.y * 37.3)), gr1 * sin(6.2832 * aS.y));
+  box = box * vec3(0.3, 0.2, 0.3) + vec3(0.0, 0.2, 0.0);
+  box.y += 0.04 * sin(t * 0.6 + aS.x * 20.0);
+  vec3 lp = mix(box, site, tb);
+  lp += (1.0 - uBuild.y) * (1.0 - tb * 0.8) * 0.012 * sin(vec3(t * 1.9, t * 1.6, t * 2.1) + aS * 43.0);
+  vec3 lr = uRB * lp;
+  vec3 pB = vec3(uB.xy, 0.0) + lr * uB.z;
+
+  // C: globe
+  float delayC = 0.5 * aS.z;
+  float fC = smoothstep(delayC, delayC + 0.5, uForm.z);
+  vec3 gp = uRC * aG;
+  vec3 pC = vec3(uC.xy, 0.0) + gp * uC.z;
+
+  vec3 pos = mix(dust, pA, fA);
+  pos = mix(pos, pB, fB);
+  pos = mix(pos, pC, fC);
+
+  // dots arc into place rather than travelling in straight lines
+  float mid = max(fA * (1.0 - fA), max(fB * (1.0 - fB), fC * (1.0 - fC))) * 4.0;
+  float ang = aS.z * 6.2832 + t * 0.35;
+  pos.xy += mid * 0.09 * vec2(cos(ang), sin(ang));
+
+  // the pointer pushes dots aside
+  vec2 dm = pos.xy - uMouse.xy;
+  float push = uMouse.z * exp(-dot(dm, dm) * 26.0);
+  pos.xy += normalize(dm + vec2(0.0001)) * push * 0.042;
+  pos.z += push * 0.14;
+
+  gl_Position = uProj * vec4(pos, 1.0);
+  float persp = uSize.y / gl_Position.w;
+
+  float sD = 0.0045 * (0.55 + aS.z);
+  float sA = uA.z * 0.0036 * (0.78 + 0.5 * aM.x);
+  float sB = uB.z * mix(0.0085, 0.0064, tb);
+  float sC = uC.z * 0.0064 * aM.z * (1.0 + aM.w * 0.35 * sin(t * 2.4));
+  float size = mix(sD, sA, fA);
+  size = mix(size, sB, fB);
+  size = mix(size, sC, fC);
+  float px = size * uSize.x * persp * uSize.z;
+  vPx = max(px, 1.0);
+  gl_PointSize = vPx + 1.0;
+
+  float aD = uEnv.w * step(0.93, fract(aS.x * 7.31 + aS.y * 3.17)) * (0.35 + 0.65 * aS.z);
+  float aB = mix(0.32, 1.0, tb) * mix(0.45, 1.0, smoothstep(-0.7, 0.7, lr.z));
+  float aC = mix(0.07, 1.0, smoothstep(-0.2, 0.25, gp.z)) * min(aM.z * 1.4, 1.0);
+  float a = mix(aD, 1.0, fA);
+  a = mix(a, aB, fB);
+  a = mix(a, aC, fC);
+  vA = a * min(px, 1.0);
+
+  float tint = mix(0.0, aM.y, fA);
+  tint = mix(tint, sin(tb * 3.14159), fB);
+  tint = mix(tint, aM.w, fC);
+  vT = tint;
+}`;
+
+const FRAG = `
+precision mediump float;
+uniform vec3 uInk;
+uniform vec3 uAccent;
+varying float vA;
+varying float vT;
+varying float vPx;
+void main() {
+  float r = length(gl_PointCoord - 0.5) * (vPx + 1.0);
+  float a = clamp(vPx * 0.5 - r + 0.5, 0.0, 1.0) * vA;
+  if (a < 0.004) discard;
+  vec3 c = mix(uInk, uAccent, clamp(vT, 0.0, 1.0));
+  gl_FragColor = vec4(c * a, a);
+}`;
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-const lerp = (a, b, t) => a + (b - a) * t;
-const smooth = (a, b, v) => {
-  const t = clamp((v - a) / (b - a));
-  return t * t * (3 - 2 * t);
-};
 
-/* ---------- the loss function ---------- */
-
-function f(x, z) {
-  const dx = x - MIN.x;
-  const dz = z - MIN.z;
-  const d2 = dx * dx + dz * dz;
-  let h = 4.6 * (1 - Math.exp(-d2 / 900));                 // broad basin
-  h += 0.42 * Math.sin(0.5 * x + 1.3) * Math.cos(0.46 * z - 0.4);
-  h += 0.16 * Math.sin(1.25 * x - 0.8 * z + 0.6);          // ripples
-  h += 1.1 * Math.exp(-((x + 5) ** 2 + (z + 2) ** 2) / 14); // a hill in the way
-  h += 0.8 * Math.exp(-((x - 12) ** 2 + (z + 9) ** 2) / 20);
-  h -= 0.7 * Math.exp(-d2 / 7);                            // the minimum
-  return h;
-}
-
-function grad(x, z) {
-  const e = 0.01;
-  return [(f(x + e, z) - f(x - e, z)) / (2 * e), (f(x, z + e) - f(x, z - e)) / (2 * e)];
-}
-
-/* ---------- gradient descent with momentum ---------- */
-
-function descend() {
-  const raw = [];
-  let x = START.x, z = START.z, vx = 0, vz = 0;
-  const fMin = f(MIN.x, MIN.z);
-  for (let i = 0; i < 1400; i++) {
-    raw.push([x, z]);
-    const [gx, gz] = grad(x, z);
-    vx = 0.9 * vx - 0.05 * gx;
-    vz = 0.9 * vz - 0.05 * gz;
-    x += vx;
-    z += vz;
-    if (i > 80 && Math.hypot(vx, vz) < 0.002) break;
-  }
-  // If momentum left it in a local dip, walk the rest of the way.
-  const [lx, lz] = raw[raw.length - 1];
-  if (f(lx, lz) - fMin > 0.05) {
-    for (let i = 1; i <= 40; i++) raw.push([lerp(lx, MIN.x, i / 40), lerp(lz, MIN.z, i / 40)]);
-  }
-
-  // Resample evenly by distance so scroll speed maps to travel speed.
-  const cum = [0];
-  for (let i = 1; i < raw.length; i++) {
-    cum.push(cum[i - 1] + Math.hypot(raw[i][0] - raw[i - 1][0], raw[i][1] - raw[i - 1][1]));
-  }
-  const total = cum[cum.length - 1];
-  const N = 520;
-  const pts = [];
-  let j = 0;
+function buildPortrait(buf) {
+  const HEAD = 16;
+  const head = new DataView(buf, 0, HEAD);
+  const n = head.getUint32(0, true);
+  const aspect = head.getFloat32(4, true);
+  const face = [head.getFloat32(8, true), head.getFloat32(12, true)];
+  if (n !== N) throw new Error(`portrait data has ${n} points, expected ${N}`);
+  const x = new Uint16Array(buf, HEAD, N);
+  const y = new Uint16Array(buf, HEAD + 2 * N, N);
+  const z = new Uint8Array(buf, HEAD + 4 * N, N);
+  const s = new Uint8Array(buf, HEAD + 5 * N, N);
+  const t = new Uint8Array(buf, HEAD + 6 * N, N);
+  const pos = new Float32Array(N * 3);
+  const size = new Float32Array(N);
+  const tint = new Float32Array(N);
   for (let i = 0; i < N; i++) {
-    const d = (i / (N - 1)) * total;
-    while (j < cum.length - 2 && cum[j + 1] < d) j++;
-    const t = clamp((d - cum[j]) / Math.max(1e-6, cum[j + 1] - cum[j]));
-    const px = lerp(raw[j][0], raw[j + 1][0], t);
-    const pz = lerp(raw[j][1], raw[j + 1][1], t);
-    pts.push({ x: px, z: pz, h: f(px, pz) });
+    pos[i * 3] = (x[i] / 65535 - 0.5) * aspect;
+    pos[i * 3 + 1] = 0.5 - y[i] / 65535;
+    pos[i * 3 + 2] = z[i] / 255;
+    size[i] = s[i] / 255;
+    tint[i] = t[i] / 255;
   }
-  return pts;
+  return { pos, size, tint, aspect, face };
 }
 
-/* ---------- shaders ---------- */
-
-const vertexShader = /* glsl */ `
-  attribute float aH;
-  uniform float uRise;
-  uniform float uHeight;
-  uniform float uHalf;
-  varying float vH;
-  varying vec3 vPos;
-
-  void main() {
-    // the surface rises out of a flat plane, centre first
-    float d = length(position.xz) / uHalf;
-    float rise = smoothstep(0.0, 1.0, clamp(uRise * 2.0 - d, 0.0, 1.0));
-    vec3 p = vec3(position.x, position.y * rise, position.z);
-    vH = aH;
-    vPos = p;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+function buildStack(rand) {
+  // x, z: site on the plate (-0.5..0.5); y: which plate (0..3)
+  const pos = new Float32Array(N * 3);
+  const per = PLATE * PLATE;
+  const d = PLATE - 1;
+  for (let i = 0; i < N; i++) {
+    const layer = Math.min(LAYERS - 1, Math.floor(i / per));
+    const j = i < per * LAYERS ? i % per : Math.floor(rand() * per);   // a few spare dots double up
+    pos[i * 3] = (j % PLATE) / d - 0.5;
+    pos[i * 3 + 1] = layer;
+    pos[i * 3 + 2] = Math.floor(j / PLATE) / d - 0.5;
   }
-`;
+  return pos;
+}
 
-const fragmentShader = /* glsl */ `
-  precision highp float;
-  uniform vec3 uBg;
-  uniform vec3 uBall;
-  uniform float uPulse;
-  uniform float uHalf;
-  varying float vH;
-  varying vec3 vPos;
-
-  // viridis, polynomial fit
-  vec3 viridis(float t) {
-    const vec3 c0 = vec3(0.2777273272234177, 0.005407344544966578, 0.3340998053353061);
-    const vec3 c1 = vec3(0.1050930431085774, 1.404613529898575, 1.384590162594685);
-    const vec3 c2 = vec3(-0.3308618287255563, 0.214847559468213, 0.09509516302823659);
-    const vec3 c3 = vec3(-4.634230498983486, -5.799100973351585, -19.33244095627987);
-    const vec3 c4 = vec3(6.228269936347081, 14.17993336680509, 56.69055260068105);
-    const vec3 c5 = vec3(4.776384997670288, -13.74514537774601, -65.35303263337234);
-    const vec3 c6 = vec3(-5.435455855934631, 4.645852612178535, 26.3124352495832);
-    return clamp(c0 + t * (c1 + t * (c2 + t * (c3 + t * (c4 + t * (c5 + t * c6))))), 0.0, 1.0);
-  }
-
-  float isoline(float v, float width) {
-    float fw = max(fwidth(v), 1e-5);
-    return 1.0 - smoothstep(width, width + 1.0, abs(fract(v - 0.5) - 0.5) / fw);
-  }
-
-  void main() {
-    float low = 1.0 - vH;                 // low loss is the bright end
-    vec3 col = viridis(low);
-
-    float minor = isoline(vH * 30.0, 0.5);
-    float major = isoline(vH * 6.0, 1.0);
-    vec2 g = vPos.xz / 2.0;
-    float grid = max(isoline(g.x, 0.3), isoline(g.y, 0.3));
-
-    vec3 c = uBg + col * (0.05 + 0.2 * low * low);
-    c += col * minor * 0.5;
-    c += col * major * 0.55;
-    c += col * grid * 0.1;
-
-    // the optimizer lights the ground around it and pings outwards
-    float d = distance(vPos.xz, uBall.xz);
-    vec3 warm = vec3(0.99, 0.91, 0.15);
-    c += warm * exp(-d * d * 0.9) * 0.22;
-    c += warm * smoothstep(0.3, 0.0, abs(d - uPulse * 7.0)) * (1.0 - uPulse) * 0.4;
-
-    float edge = 1.0 - smoothstep(0.55, 1.0, length(vPos.xz) / uHalf);
-    gl_FragColor = vec4(mix(uBg, c, edge), 1.0);
-  }
-`;
-
-/* ---------- scene ---------- */
-
-export function start({ canvas, state, report, startLoss, reduceMotion }) {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  const small = window.matchMedia('(max-width: 720px)');
-  renderer.setClearColor(BG, 1);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
-
-  // surface
-  const seg = small.matches ? 120 : 200;
-  const geo = new THREE.PlaneGeometry(SIZE, SIZE, seg, seg);
-  geo.rotateX(-Math.PI / 2);
-  const pos = geo.attributes.position;
-  const hs = new Float32Array(pos.count);
-  let hMin = Infinity, hMax = -Infinity;
-  for (let i = 0; i < pos.count; i++) {
-    const h = f(pos.getX(i), pos.getZ(i));
-    hs[i] = h;
-    if (h < hMin) hMin = h;
-    if (h > hMax) hMax = h;
-  }
-  const norm = (h) => (h - hMin) / (hMax - hMin);
-  const worldY = (h) => (h - hMin) * HEIGHT;
-  for (let i = 0; i < pos.count; i++) {
-    pos.setY(i, worldY(hs[i]));
-    hs[i] = norm(hs[i]);
-  }
-  geo.setAttribute('aH', new THREE.BufferAttribute(hs, 1));
-
-  const uniforms = {
-    uBg: { value: new THREE.Color(BG) },
-    uBall: { value: new THREE.Vector3() },
-    uPulse: { value: 0 },
-    uRise: { value: 0 },
-    uHeight: { value: HEIGHT },
-    uHalf: { value: SIZE / 2 },
+function buildGlobe(landBits, rand) {
+  const pos = new Float32Array(N * 3);
+  const weight = new Float32Array(N);
+  const accent = new Float32Array(N);
+  const isLand = (lat, lon) => {
+    const r = Math.min(359, Math.floor((90 - lat) * 2));
+    const c = Math.min(719, Math.floor((lon + 180) * 2));
+    const k = r * 720 + c;
+    return (landBits[k >> 3] >> (7 - (k & 7))) & 1;
   };
-  const surface = new THREE.Mesh(geo, new THREE.ShaderMaterial({
-    uniforms, vertexShader, fragmentShader, side: THREE.DoubleSide,
-  }));
-  scene.add(surface);
+  const put = (i, lat, lon, w, acc) => {
+    const cl = Math.cos(lat * DEG);
+    pos[i * 3] = cl * Math.sin(lon * DEG);
+    pos[i * 3 + 1] = Math.sin(lat * DEG);
+    pos[i * 3 + 2] = cl * Math.cos(lon * DEG);
+    weight[i] = w;
+    accent[i] = acc;
+  };
 
-  // descent path
-  const path = descend().map((p) => new THREE.Vector3(p.x, worldY(p.h), p.z));
-  const lossAt = path.map((p) => p.y / HEIGHT);
-  const lossStart = lossAt[0];
-  const lossEnd = lossAt[lossAt.length - 1];
-  const toLoss = (v) => clamp((v - lossEnd) / (lossStart - lossEnd), 0, 1.2) * startLoss;
-
-  const lift = 0.07;
-  const trailGeo = new THREE.BufferGeometry().setFromPoints(path.map((p) => new THREE.Vector3(p.x, p.y + lift, p.z)));
-  const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({ color: 0xfde725, transparent: true, opacity: 0.9 }));
-  scene.add(trail);
-
-  const STEP_EVERY = 13;
-  const stepPts = path.filter((_, i) => i % STEP_EVERY === 0).map((p) => new THREE.Vector3(p.x, p.y + lift, p.z));
-  const steps = new THREE.Points(
-    new THREE.BufferGeometry().setFromPoints(stepPts),
-    new THREE.PointsMaterial({ color: 0xfff6a0, size: 4.5, sizeAttenuation: false }),
-  );
-  scene.add(steps);
-
-  // the minimum it is heading for
-  const goal = new THREE.Mesh(
-    new THREE.RingGeometry(0.5, 0.56, 48),
-    new THREE.MeshBasicMaterial({ color: 0xfde725, transparent: true, opacity: 0.55, side: THREE.DoubleSide }),
-  );
-  goal.rotation.x = -Math.PI / 2;
-  goal.position.set(MIN.x, worldY(f(MIN.x, MIN.z)) + 0.05, MIN.z);
-  scene.add(goal);
-
-  // optimizer
-  const ball = new THREE.Mesh(
-    new THREE.SphereGeometry(0.2, 24, 16),
-    new THREE.MeshBasicMaterial({ color: 0xfff9c4 }),
-  );
-  scene.add(ball);
-
-  const glowCanvas = document.createElement('canvas');
-  glowCanvas.width = glowCanvas.height = 128;
-  const g2 = glowCanvas.getContext('2d');
-  const grd = g2.createRadialGradient(64, 64, 0, 64, 64, 64);
-  grd.addColorStop(0, 'rgba(253,231,37,0.9)');
-  grd.addColorStop(0.25, 'rgba(253,231,37,0.35)');
-  grd.addColorStop(1, 'rgba(253,231,37,0)');
-  g2.fillStyle = grd;
-  g2.fillRect(0, 0, 128, 128);
-  const glow = new THREE.Sprite(new THREE.SpriteMaterial({
-    map: new THREE.CanvasTexture(glowCanvas), blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false,
-  }));
-  glow.scale.setScalar(2.6);
-  scene.add(glow);
-
-  /* ---------- sizing ---------- */
-
-  let width = 1, height = 1;
-  function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small.matches ? 1.5 : 2));
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    dirty = true;
+  // city marker: a centre dot and two rings
+  const rings = [[1, 0, 3.4], [22, 2.3, 1.25], [40, 4.6, 0.85]];
+  let n = 0;
+  for (const [count, radius, w] of rings) {
+    for (let k = 0; k < count; k++) {
+      const a = (k / count) * Math.PI * 2;
+      put(n++, CITY.lat + Math.sin(a) * radius, CITY.lon + (Math.cos(a) * radius) / Math.cos(CITY.lat * DEG), w, 1);
+    }
   }
 
-  /* ---------- frame ---------- */
+  // land: an even (Fibonacci) spread over the sphere, kept where the mask says land
+  const M = 96000;
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  const land = [];
+  for (let k = 0; k < M; k++) {
+    const y = 1 - (2 * (k + 0.5)) / M;
+    const lat = Math.asin(y) / DEG;
+    const lon = (((k * golden) / DEG) % 360) - 180;
+    if (isLand(lat, lon)) land.push(lat, lon);
+  }
+  const landMax = N - n - 3400;
+  let count = land.length / 2;
+  const keep = count > landMax ? landMax / count : 1;
+  for (let k = 0; k < count && n < N - 3400; k++) {
+    if (keep < 1 && rand() > keep) continue;
+    put(n++, land[k * 2], land[k * 2 + 1], 1, 0);
+  }
 
-  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  // the rest: a faint, even spread that gives the sphere its body
+  const rest = N - n;
+  for (let k = 0; k < rest; k++) {
+    const y = 1 - (2 * (k + 0.5)) / rest;
+    put(n++, Math.asin(y) / DEG, (((k * golden) / DEG) % 360) - 180, 0.42, 0);
+  }
+  return { pos, weight, accent };
+}
+
+function rotation(yaw, pitch) {
+  // column-major mat3 for Rx(pitch) * Ry(yaw)
+  const ca = Math.cos(yaw), sa = Math.sin(yaw), cb = Math.cos(pitch), sb = Math.sin(pitch);
+  return [ca, sb * sa, -cb * sa, 0, cb, sb, sa, -sb * ca, cb * ca];
+}
+
+export async function createScene({ canvas, slots, reduceMotion }) {
+  const gl = canvas.getContext('webgl', {
+    alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false,
+    powerPreference: 'high-performance',
+  });
+  if (!gl) throw new Error('WebGL unavailable');
+
+  const [portraitBuf, landBuf] = await Promise.all([
+    fetch(new URL('../data/portrait.bin', import.meta.url)).then((r) => { if (!r.ok) throw new Error('portrait data'); return r.arrayBuffer(); }),
+    fetch(new URL('../data/land.bin', import.meta.url)).then((r) => { if (!r.ok) throw new Error('land data'); return r.arrayBuffer(); }),
+  ]);
+
+  const rand = mulberry32(20241);
+  const portrait = buildPortrait(portraitBuf);
+  const lattice = buildStack(rand);
+  const globe = buildGlobe(new Uint8Array(landBuf), rand);
+  const seeds = new Float32Array(N * 3);
+  for (let i = 0; i < seeds.length; i++) seeds[i] = rand();
+  const misc = new Float32Array(N * 4);
+  for (let i = 0; i < N; i++) {
+    misc[i * 4] = portrait.size[i];
+    misc[i * 4 + 1] = portrait.tint[i];
+    misc[i * 4 + 2] = globe.weight[i];
+    misc[i * 4 + 3] = globe.accent[i];
+  }
+
+  const compile = (type, src) => {
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh) || 'shader');
+    return sh;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog) || 'link');
+  gl.useProgram(prog);
+
+  const attr = (name, data, size) => {
+    const loc = gl.getAttribLocation(prog, name);
+    if (loc < 0) return;
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0);
+  };
+  attr('aP', portrait.pos, 3);
+  attr('aS', seeds, 3);
+  attr('aL', lattice, 3);
+  attr('aG', globe.pos, 3);
+  attr('aM', misc, 4);
+
+  const U = {};
+  for (const name of ['uProj', 'uA', 'uRA', 'uFace', 'uB', 'uRB', 'uC', 'uRC', 'uForm', 'uBuild', 'uEnv', 'uMouse', 'uSize', 'uInk', 'uAccent']) {
+    U[name] = gl.getUniformLocation(prog, name);
+  }
+
+  gl.disable(gl.DEPTH_TEST);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  gl.clearColor(0, 0, 0, 0);
+  gl.uniform2f(U.uFace, portrait.face[0], portrait.face[1]);
+
+  // What the page asks for. main.js writes these; the scene eases towards them.
+  const stage = {
+    formA: 1, formB: 0, formC: 0, build: 0, lock: 0,
+    dust: 0, scroll: 0, loose: 1,
+    ink: [17, 19, 42], accent: [255, 84, 64],
+  };
+  const cur = { formA: 0, formB: 0, formC: 0, build: 0, lock: 0, dust: 0, ink: stage.ink.slice(), intro: reduceMotion.matches ? 1 : 0 };
+
+  let width = 1, height = 1, aspect = 1, dpr = 1;
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (!w || !h) return;
+    width = w; height = h; aspect = w / h;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    const near = 0.1, far = 30;
+    const p10 = (far + near) / (near - far), p14 = (2 * far * near) / (near - far);
+    gl.uniformMatrix4fv(U.uProj, false, [
+      CAM / aspect, 0, 0, 0,
+      0, CAM, 0, 0,
+      0, 0, p10, -1,
+      0, 0, -CAM * p10 + p14, CAM,
+    ]);
+  }
+  resize();
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+  else window.addEventListener('resize', resize);
+
+  // slot rectangle -> world space (y spans -1..1 over the canvas height)
+  const world = (el) => {
+    const r = el.getBoundingClientRect();
+    return {
+      x: ((r.left + r.width / 2) / width * 2 - 1) * aspect,
+      y: 1 - ((r.top + r.height / 2) / height) * 2,
+      w: (r.width / height) * 2,
+      h: (r.height / height) * 2,
+    };
+  };
+
+  const pointer = { x: 0, y: 0, nx: 0, ny: 0, sx: 0, sy: 0, force: 0, last: -1e9 };
   window.addEventListener('pointermove', (e) => {
-    pointer.tx = e.clientX / window.innerWidth - 0.5;
-    pointer.ty = e.clientY / window.innerHeight - 0.5;
+    pointer.x = (e.clientX / width * 2 - 1) * aspect;
+    pointer.y = 1 - (e.clientY / height) * 2;
+    pointer.nx = e.clientX / width - 0.5;
+    pointer.ny = e.clientY / height - 0.5;
+    pointer.last = performance.now();
   }, { passive: true });
 
-  const center = new THREE.Vector3(0, 2.2, 0);
-  const target = new THREE.Vector3();
-  const ballPos = new THREE.Vector3();
-  let p = state.progress;      // eased progress
-  let rise = reduceMotion.matches ? 1 : 0;
-  let dirty = true;
-  let last = performance.now();
-  let t0 = last;
+  let running = true, raf = 0, last = performance.now(), t0 = last, started = false, blank = false;
 
   function frame(now) {
-    requestAnimationFrame(frame);
-    if (document.hidden) return;
+    raf = requestAnimationFrame(frame);
+    if (document.hidden) { last = now; return; }
+    const still = reduceMotion.matches;
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    const still = reduceMotion.matches;
-    const time = (now - t0) / 1000;
+    const time = still ? 0 : (now - t0) / 1000;
+    const k = still ? 1 : 1 - Math.exp(-dt * 5.5);
 
-    // ease towards the scroll position
-    const before = p;
-    p = still ? state.progress : p + (state.progress - p) * (1 - Math.exp(-dt * 5));
-    if (Math.abs(state.progress - p) < 0.0002) p = state.progress;
+    if (!still && cur.intro < 1) cur.intro = Math.min(1, cur.intro + dt / 2.6);
+    for (const key of ['formA', 'formB', 'formC', 'build', 'lock', 'dust']) cur[key] += (stage[key] - cur[key]) * k;
+    for (let i = 0; i < 3; i++) cur.ink[i] += (stage.ink[i] - cur.ink[i]) * (still ? 1 : 1 - Math.exp(-dt * 4));
 
-    if (!still && rise < 1) rise = Math.min(1, rise + dt / 2.4);
-    pointer.x += (pointer.tx - pointer.x) * 0.05;
-    pointer.y += (pointer.ty - pointer.y) * 0.05;
+    pointer.sx += (pointer.nx - pointer.sx) * (still ? 1 : 0.06);
+    pointer.sy += (pointer.ny - pointer.sy) * (still ? 1 : 0.06);
+    const active = !still && now - pointer.last < 220 ? 1 : 0;
+    pointer.force += (active - pointer.force) * (active ? 0.18 : 0.045);
 
-    if (still && !dirty && before === p) return;
-    dirty = false;
+    // nothing on screen: clear once, then idle until a formation comes back
+    const ease = cur.intro * cur.intro * (3 - 2 * cur.intro);
+    const visible = cur.formA * ease > 0.002 || cur.formB > 0.002 || cur.formC > 0.002 || cur.dust > 0.004;
+    if (!visible) {
+      if (!blank) { gl.clear(gl.COLOR_BUFFER_BIT); blank = true; }
+      if (!started) { started = true; canvas.classList.add('is-live'); }
+      return;
+    }
+    blank = false;
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
-    // optimizer position along the path
-    const fi = p * (path.length - 1);
-    const i0 = Math.floor(fi);
-    const i1 = Math.min(path.length - 1, i0 + 1);
-    ballPos.lerpVectors(path[i0], path[i1], fi - i0);
+    // A: portrait, fitted inside its slot and standing on its bottom edge
+    const a = world(slots.portrait);
+    const sA = Math.min(a.h, a.w / portrait.aspect);
+    gl.uniform4f(U.uA, a.x, a.y - a.h / 2 + sA / 2, sA, stage.loose);
+    const sway = still ? 0 : Math.sin(time * 0.45) * 0.07;
+    gl.uniform2f(U.uRA, pointer.sx * 0.5 + sway, pointer.sy * 0.28);
 
-    const riseEase = 1 - (1 - rise) ** 3;
-    uniforms.uRise.value = riseEase;
-    uniforms.uBall.value.copy(ballPos);
-    uniforms.uPulse.value = still ? 1 : (time * 0.32) % 1;
+    // B: stack, turning slowly
+    const b = world(slots.lattice);
+    gl.uniform4f(U.uB, b.x, b.y, Math.min(b.w, b.h) * 0.62, 0);
+    gl.uniformMatrix3fv(U.uRB, false, rotation(0.62 + time * 0.12 + cur.build * 0.9 + pointer.sx * 0.4, 0.5 + pointer.sy * 0.2));
 
-    const shown = smooth(0.7, 1, rise);
-    const bob = still ? 0 : Math.sin(time * 2.2) * 0.03;
-    ball.position.set(ballPos.x, ballPos.y + 0.2 + bob, ballPos.z);
-    ball.scale.setScalar(shown);
-    glow.position.copy(ball.position);
-    glow.scale.setScalar(2.6 * shown * (still ? 1 : 1 + Math.sin(time * 3) * 0.06));
-    trail.geometry.setDrawRange(0, shown > 0 ? i1 + 1 : 0);
-    steps.geometry.setDrawRange(0, shown > 0 ? Math.floor(i0 / STEP_EVERY) + 1 : 0);
-    goal.material.opacity = 0.55 * shown;
-    goal.scale.setScalar(still ? 1 : 1 + Math.sin(time * 1.6) * 0.12);
+    // C: globe, turned so the city faces the camera. The globe usually sits off to one
+    // side, so "facing the camera" is not straight ahead: aim along the line to the lens,
+    // otherwise perspective pushes the marker towards the edge of the screen.
+    const c = world(slots.globe);
+    gl.uniform4f(U.uC, c.x, c.y, Math.min(c.w, c.h) * 0.5, 0);
+    const aimYaw = Math.atan2(-c.x, CAM);
+    const aimPitch = Math.atan2(c.y, CAM);
+    const spin = (1 - cur.formC) * 0.9 + (still ? 0 : Math.sin(time * 0.22) * 0.14) + pointer.sx * 0.3;
+    gl.uniformMatrix3fv(U.uRC, false, rotation(-CITY.lon * DEG + aimYaw + spin, 0.5 + aimPitch + pointer.sy * 0.2));
 
-    // camera: wide view of the whole landscape, closing in on the optimizer
-    const follow = smooth(0.02, 0.3, p);
-    const e = p * p * (3 - 2 * p);
-    target.lerpVectors(center, ballPos, follow);
-    const sway = still ? 0 : Math.sin(time * 0.12) * 0.07;
-    const theta = 1.15 + p * 2.6 + sway + pointer.x * 0.12;
-    const r = lerp(34, 12.5, e);
-    const hgt = lerp(15.5, 6.2, e) - pointer.y * 1.2;
-    camera.position.set(target.x + Math.cos(theta) * r, target.y + hgt, target.z + Math.sin(theta) * r);
-    camera.lookAt(target);
+    gl.uniform3f(U.uForm, cur.formA * ease, cur.formB, cur.formC);
+    gl.uniform2f(U.uBuild, cur.build, cur.lock);
+    gl.uniform4f(U.uEnv, time, stage.scroll, aspect, cur.dust);
+    gl.uniform3f(U.uMouse, pointer.x, pointer.y, pointer.force);
+    gl.uniform3f(U.uSize, (height * dpr) / 2, CAM, 1);
+    gl.uniform3f(U.uInk, cur.ink[0] / 255, cur.ink[1] / 255, cur.ink[2] / 255);
+    gl.uniform3f(U.uAccent, stage.accent[0] / 255, stage.accent[1] / 255, stage.accent[2] / 255);
+    gl.drawArrays(gl.POINTS, 0, N);
 
-    // on wide screens, sit the landscape to the right of the hero text
-    const wide = width > 900 ? 1 : 0;
-    const shiftX = wide * 0.24 * (1 - smooth(0.05, 0.35, p));
-    const shiftY = (1 - wide) * 0.3 * (1 - smooth(0.05, 0.3, p));
-    if (shiftX || shiftY) camera.setViewOffset(width, height, -width * shiftX, -height * shiftY, width, height);
-    else camera.clearViewOffset();
-
-    renderer.render(scene, camera);
-    report(p, toLoss(ballPos.y / HEIGHT));
+    if (!started) { started = true; canvas.classList.add('is-live'); }
   }
 
-  resize();
-  window.addEventListener('resize', resize);
-  window.addEventListener('scroll', () => { dirty = true; }, { passive: true });
-  if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', () => { dirty = true; rise = 1; });
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); cancelAnimationFrame(raf); running = false; });
+  raf = requestAnimationFrame(frame);
 
-  canvas.classList.add('is-live');
-  requestAnimationFrame(frame);
+  return { stage, count: N, get running() { return running; } };
 }

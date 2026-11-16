@@ -1,434 +1,454 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="paper">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jainam Bhansali · Applied AI Engineer</title>
-  <meta name="description" content="Jainam Bhansali is an applied AI engineer in Jersey City, NJ, open to forward deployed engineer and applied AI roles and to freelance projects. M.S. in Artificial Intelligence, Yeshiva University.">
-  <meta name="theme-color" content="#110a22">
+  <meta name="description" content="Jainam Bhansali is an applied AI engineer in Jersey City, NJ. He turns messy problems into working AI, and is open to forward deployed and applied AI roles and to freelance projects.">
+  <meta name="theme-color" content="#edece7">
   <meta property="og:title" content="Jainam Bhansali · Applied AI Engineer">
-  <meta property="og:description" content="Applied AI engineer, open to forward deployed and applied AI roles and to freelance projects.">
+  <meta property="og:description" content="I turn messy problems into working AI. Open to forward deployed and applied AI roles, and to freelance projects.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bhansalijainam.github.io/">
+  <meta property="og:image" content="https://bhansalijainam.github.io/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23110a22'/%3E%3Cpath d='M8 26c10-10 20 12 30 2s12-10 18-6' fill='none' stroke='%2321918c' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M8 40c10-10 20 12 30 2s12-10 18-6' fill='none' stroke='%235ec962' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='44' r='7' fill='%23fde725'/%3E%3C/svg%3E">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311132a'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23ff5440'/%3E%3C/svg%3E">
+  <link rel="preload" href="./assets/fonts/schibsted-grotesk-400-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/main.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
 
-  <!-- 3D loss landscape, drawn by assets/js/scene.js -->
+  <!-- 27,000 dots, drawn by assets/js/scene.js -->
   <canvas class="scene" id="scene" aria-hidden="true"></canvas>
-  <div class="veil" aria-hidden="true"></div>
 
-  <a class="skip" href="#about">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <header class="nav">
-    <a class="nav-mark" href="#top" aria-label="Jainam Bhansali, back to top">
-      <span class="nav-dot" aria-hidden="true"></span>
-      <span>Jainam Bhansali</span>
-    </a>
-
+  <header class="nav" id="nav">
+    <a class="nav-brand" href="#top">Jainam Bhansali</a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#work">Work</a>
       <a href="#path">Path</a>
-      <a href="#toolkit">Toolkit</a>
-      <a href="#contact">Contact</a>
     </nav>
-
-    <p class="hud" aria-hidden="true">
-      <span class="hud-step">step <b id="hud-step">0000</b></span>
-      <span>loss <b id="hud-loss">2.303</b></span>
-    </p>
+    <a class="nav-cta" href="#contact"><span class="pulse" aria-hidden="true"></span>Available for work</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
   </header>
 
-  <!-- colorbar: the same scale the landscape is painted with -->
-  <div class="colorbar" aria-hidden="true">
-    <span class="colorbar-label">loss</span>
-    <div class="colorbar-track">
-      <span class="colorbar-marker" id="colorbar-marker"></span>
-    </div>
-    <ol class="colorbar-ticks">
-      <li>2.3</li>
-      <li>1.7</li>
-      <li>1.2</li>
-      <li>0.6</li>
-      <li>0.0</li>
-    </ol>
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Menu">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#work">Work</a>
+      <a href="#path">Path</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="menu-foot">Jersey City, NJ <span aria-hidden="true">/</span> Open to forward deployed and applied AI roles, and freelance projects</p>
   </div>
 
-  <main id="top">
+  <main id="main">
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="wrap hero-inner">
-        <p class="eyebrow" data-load>
-          <span class="status-dot" aria-hidden="true"></span>
-          Jersey City, NJ <span class="sep">/</span> Open to forward deployed, applied AI and freelance work
-        </p>
+    <section class="hero" id="top" data-theme="paper">
+      <div class="hero-slot" id="slot-portrait" aria-hidden="true"></div>
 
-        <h1 class="hero-name">
-          <span class="line"><span data-load>Jainam</span></span>
-          <span class="line"><span data-load>Bhansali</span></span>
+      <div class="hero-body wrap">
+        <p class="hero-kicker" data-load>Jainam Bhansali <span aria-hidden="true">/</span> Applied AI engineer</p>
+
+        <h1 class="hero-title" aria-label="I turn messy problems into working AI.">
+          <span class="ln"><span class="lni">I turn <span class="noise" data-scramble>messy</span></span></span>
+          <span class="ln"><span class="lni"><span class="noise" data-scramble>problems</span> into</span></span>
+          <span class="ln"><span class="lni signal">working AI.</span></span>
         </h1>
 
-        <p class="hero-lede" data-load>
-          Applied AI engineer. I build next to the people who will use it, and test it like a QA lead.
+        <p class="hero-sub" data-load>
+          I take a loose requirement and deliver something a team can run, from the model
+          to the app around it. Open to forward deployed and applied AI roles, and to
+          freelance projects.
         </p>
-
-        <p class="hero-text" data-load>
-          I take AI work from a messy requirement to something a team can run:
-          models, LLM features and the app around them. I hold a master's in
-          Artificial Intelligence from Yeshiva University and spent two years in
-          software testing at VOIS.
-        </p>
-
-        <div class="hero-actions" data-load>
-          <a class="btn btn-primary" href="#contact">Start a project</a>
-          <a class="btn" href="https://www.linkedin.com/in/jainam-bhansali/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn" href="https://github.com/bhansalijainam" target="_blank" rel="noopener">GitHub</a>
+        <div class="hero-cta" data-load>
+          <a class="btn" href="#contact" data-magnetic><span>Start a project</span><i aria-hidden="true"></i></a>
+          <a class="link" href="#work">See the work</a>
         </div>
       </div>
 
-      <p class="hero-hint" data-load aria-hidden="true">
-        <span class="hint-line"></span>
-        Scroll to step the optimizer downhill
+      <div class="hero-base wrap" data-load>
+        <dl class="hero-meta">
+          <div><dt>Based in</dt><dd>Jersey City, NJ <span class="clock" data-clock></span></dd></div>
+          <div><dt>Background</dt><dd>M.S. Artificial Intelligence, 2+ years in software QA</dd></div>
+        </dl>
+        <p class="hero-hint">27,000 dots. Scroll and they rearrange. <span aria-hidden="true">↓</span></p>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement wrap" id="about" data-theme="paper">
+      <p class="label">About</p>
+      <p class="statement-text" data-scrub>
+        I learned software by trying to break it. Two years in QA at VOIS put me close to
+        requirements, releases and the people waiting on them. A master's in AI at Yeshiva
+        University added the modeling side. Now I build AI that has to hold up for a customer.
       </p>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="wrap about">
-        <div class="about-copy">
-          <p class="label" data-reveal>About</p>
-          <h2 class="h2" data-reveal>I learned software by trying to break it. Now I build AI that has to hold up for a customer.</h2>
-          <p class="body-lg" data-reveal>
-            Two years in QA at VOIS put me close to requirements, releases and the
-            people waiting on them. My master's added the modeling side: neural
-            networks, NLP and fine-tuning large language models for better
-            performance and cheaper deployment. I'm looking for forward deployed
-            and applied AI roles, and I take freelance projects.
+    <!-- SERVICES -->
+    <section class="services wrap" id="services" data-theme="paper">
+      <header class="sec-head">
+        <p class="label">Services</p>
+        <h2 class="h2" data-words>Three ways to work with me.</h2>
+      </header>
+
+      <ul class="svc">
+        <li class="svc-row" data-reveal>
+          <h3 class="svc-title">Forward deployed</h3>
+          <p class="svc-text">
+            I join your team or your customer's, turn a loose requirement into a scoped
+            build, and stay through rollout. Requirement analysis, test design and defect
+            management were my daily work at VOIS.
           </p>
+          <ul class="svc-tags"><li>Requirements</li><li>Scoped builds</li><li>Rollout</li></ul>
+        </li>
+        <li class="svc-row" data-reveal>
+          <h3 class="svc-title">Applied AI</h3>
+          <p class="svc-text">
+            Fine-tuned language models, NLP, computer vision and classic machine learning,
+            chosen for the problem. I evaluate against real data before anything ships.
+          </p>
+          <ul class="svc-tags"><li>LLM fine-tuning</li><li>NLP</li><li>Computer vision</li><li>Evaluation</li></ul>
+        </li>
+        <li class="svc-row" data-reveal>
+          <h3 class="svc-title">Freelance</h3>
+          <p class="svc-text">
+            A prototype, a model, a data analysis or an AI feature inside a web app. Python
+            on the model side, TypeScript and JavaScript on the product side, with a clear
+            scope agreed up front.
+          </p>
+          <ul class="svc-tags"><li>Prototypes</li><li>Models</li><li>Data analysis</li><li>AI features</li></ul>
+        </li>
+      </ul>
+    </section>
 
-          <dl class="facts" data-reveal>
-            <div>
-              <dt>Degree</dt>
-              <dd>M.S. Artificial Intelligence, Yeshiva University</dd>
-            </div>
-            <div>
-              <dt>Industry</dt>
-              <dd>2+ years in software QA at VOIS</dd>
-            </div>
-            <div>
-              <dt>Available for</dt>
-              <dd>Full-time roles and freelance projects</dd>
-            </div>
-          </dl>
+    <!-- PROCESS -->
+    <section class="process" id="process" data-theme="ink">
+      <div class="process-pin">
+        <div class="process-copy wrap">
+          <p class="label">Process</p>
+          <h2 class="h2">From noise <br>to signal.</h2>
+
+          <ol class="steps" id="steps">
+            <li class="step is-active">
+              <span class="step-n">1</span>
+              <div><h3>Listen</h3><p>Sit with the people who own the problem until the requirement is clear.</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">2</span>
+              <div><h3>Scope</h3><p>Agree what done looks like, and what is out of scope.</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">3</span>
+              <div><h3>Build</h3><p>Put a first working version in front of users early.</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">4</span>
+              <div><h3>Harden</h3><p>Test it like a QA lead, evaluate on real data, then hand it over.</p></div>
+            </li>
+          </ol>
         </div>
 
-        <figure class="portrait" data-reveal data-tilt>
-          <div class="portrait-frame">
-            <span class="portrait-sun" aria-hidden="true"></span>
-            <span class="portrait-orbit" aria-hidden="true"></span>
-            <span class="portrait-spark portrait-spark-a" aria-hidden="true"></span>
-            <span class="portrait-spark portrait-spark-b" aria-hidden="true"></span>
-            <div class="portrait-figure">
-              <img src="./assets/images/portrait-toon.webp" alt="Illustrated portrait of Jainam Bhansali, smiling, in a pink checked shirt and round sunglasses" width="1440" height="1180" loading="lazy">
-              <span class="portrait-sheen" aria-hidden="true"></span>
-            </div>
-          </div>
-          <figcaption>fig. 1 <span>Jainam, Jersey City</span></figcaption>
-        </figure>
-      </div>
-
-      <div class="wrap services">
-        <p class="label" data-reveal>How I work</p>
-        <h2 class="h2" data-reveal>Three ways to work with me</h2>
-
-        <div class="focus">
-          <article class="focus-item" data-reveal>
-            <p class="focus-tag">Forward deployed</p>
-            <h3 class="h3">Build next to the customer</h3>
-            <p>
-              I join your team or your customer's, turn a loose requirement into a
-              scoped build, and stay through rollout. Requirement analysis, test
-              design and defect management were my daily work at VOIS, and it
-              earned the Star Award.
-            </p>
-          </article>
-
-          <article class="focus-item" data-reveal>
-            <p class="focus-tag">Applied AI</p>
-            <h3 class="h3">Models that do a real job</h3>
-            <p>
-              Fine-tuned language models, NLP, computer vision and classic machine
-              learning, chosen for the problem. I evaluate against real data
-              before anything ships.
-            </p>
-          </article>
-
-          <article class="focus-item" data-reveal>
-            <p class="focus-tag">Freelance</p>
-            <h3 class="h3">Scoped projects, shipped</h3>
-            <p>
-              A prototype, a model, a data analysis or an AI feature inside a web
-              app. Python on the model side, TypeScript and JavaScript on the
-              product side, with a clear scope agreed up front.
-            </p>
-          </article>
-        </div>
+        <div class="process-slot" id="slot-stack" aria-hidden="true"></div>
+        <p class="process-read" aria-hidden="true"><b id="read-count">0</b> of 27,000 dots in place</p>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="label" data-reveal>Projects</p>
-            <h2 class="h2" data-reveal>Selected work from GitHub</h2>
+    <!-- WORK -->
+    <section class="work" id="work" data-theme="paper">
+      <div class="work-scroller" id="work-scroller">
+        <div class="work-pin">
+          <header class="sec-head sec-head-row wrap">
+            <div>
+              <p class="label">Work</p>
+              <h2 class="h2" data-words>Selected work.</h2>
+            </div>
+            <a class="link" href="https://github.com/bhansalijainam?tab=repositories" target="_blank" rel="noopener">All repositories on GitHub</a>
+          </header>
+
+          <div class="work-track" id="work-track">
+          <a class="card" href="https://github.com/bhansalijainam/Lung-Segmentation-using-U-Net-A-Comparative-Study-on-CT-Images" target="_blank" rel="noopener" data-cursor="Open">
+            <div class="cover">
+            <svg class="cv cv-lung" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+              <defs>
+                <pattern id="pd-ink" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.15" class="f-ink"/></pattern>
+                <pattern id="pd-acc" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.7" class="f-acc"/></pattern>
+              </defs>
+              <ellipse class="s-ink dots" cx="150" cy="152" rx="114" ry="94"/>
+              <path d="M118 92C92 96 76 128 78 162c2 30 18 46 42 42 14-3 18-18 17-38l-1-56c0-12-8-20-18-18Z" fill="url(#pd-ink)"/><path d="M182 92c26 4 42 36 40 70-2 30-18 46-42 42-14-3-18-18-17-38l1-56c0-12 8-20 18-18Z" fill="url(#pd-ink)"/>
+              <g class="lung-mask"><path class="f-acc" d="M118 92C92 96 76 128 78 162c2 30 18 46 42 42 14-3 18-18 17-38l-1-56c0-12-8-20-18-18Z"/><path class="f-acc" d="M182 92c26 4 42 36 40 70-2 30-18 46-42 42-14-3-18-18-17-38l1-56c0-12 8-20 18-18Z"/></g>
+              <path class="s-ink" d="M118 92C92 96 76 128 78 162c2 30 18 46 42 42 14-3 18-18 17-38l-1-56c0-12-8-20-18-18Z"/><path class="s-ink" d="M182 92c26 4 42 36 40 70-2 30-18 46-42 42-14-3-18-18-17-38l1-56c0-12 8-20 18-18Z"/>
+              <circle class="s-ink" cx="150" cy="224" r="8"/>
+              <line class="s-acc lung-line" x1="28" x2="272" y1="54" y2="54"/>
+              <g class="unet" transform="translate(290 98)"><line class="s-ink dash" x1="13" x2="88" y1="10" y2="10"/><line class="s-ink dash" x1="28" x2="73" y1="32" y2="32"/><line class="s-ink dash" x1="43" x2="58" y1="54" y2="54"/><rect class="f-ink u0" x="0" y="0" width="11" height="20" rx="2"/><rect class="f-ink u1" x="15" y="22" width="11" height="20" rx="2"/><rect class="f-ink u2" x="30" y="44" width="11" height="20" rx="2"/><rect class="f-ink u3" x="45" y="66" width="11" height="20" rx="2"/><rect class="f-ink u4" x="60" y="44" width="11" height="20" rx="2"/><rect class="f-ink u5" x="75" y="22" width="11" height="20" rx="2"/><rect class="f-ink u6" x="90" y="0" width="11" height="20" rx="2"/></g>
+              <text class="cv-t" x="290" y="214">U-Net</text>
+              <text class="cv-t" x="28" y="278">CT slice to mask</text>
+            </svg>
+            </div>
+            <p class="card-tag"><span>Computer vision</span><span>2025</span></p>
+            <h3 class="card-title">Lung segmentation with U-Net</h3>
+            <p class="card-text">A comparative study of U-Net models for segmenting lungs in CT images.</p>
+            <p class="card-meta">Jupyter Notebook <span aria-hidden="true">/</span> GitHub <span class="arr" aria-hidden="true">↗</span></p>
+          </a>
+          <a class="card" href="https://github.com/bhansalijainam/Stall-Number-Detection-of-Cows-using-a-Pre-trained-ResNet50-Model" target="_blank" rel="noopener" data-cursor="Open">
+            <div class="cover">
+            <svg class="cv cv-stall" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+              <line class="s-ink" x1="22" x2="378" y1="88" y2="88"/>
+              <line class="s-ink" x1="24.0" x2="24.0" y1="88" y2="252"/>
+              <line class="s-ink" x1="94.4" x2="94.4" y1="88" y2="252"/>
+              <line class="s-ink" x1="164.8" x2="164.8" y1="88" y2="252"/>
+              <line class="s-ink" x1="235.2" x2="235.2" y1="88" y2="252"/>
+              <line class="s-ink" x1="305.6" x2="305.6" y1="88" y2="252"/>
+              <line class="s-ink" x1="376.0" x2="376.0" y1="88" y2="252"/>
+              <rect class="s-ink plate" x="38.2" y="100" width="42" height="26" rx="3"/><text class="cv-n" x="59.2" y="118" text-anchor="middle">12</text><ellipse cx="59.2" cy="200" rx="22" ry="34" fill="url(#pd-ink)"/><ellipse class="s-ink" cx="59.2" cy="200" rx="22" ry="34"/>
+              <rect class="s-ink plate" x="108.6" y="100" width="42" height="26" rx="3"/><text class="cv-n" x="129.6" y="118" text-anchor="middle">13</text><ellipse cx="129.6" cy="200" rx="22" ry="34" fill="url(#pd-ink)"/><ellipse class="s-ink" cx="129.6" cy="200" rx="22" ry="34"/>
+              <rect class="s-ink plate" x="179.0" y="100" width="42" height="26" rx="3"/><text class="cv-n" x="200.0" y="118" text-anchor="middle">14</text><ellipse cx="200.0" cy="200" rx="22" ry="34" fill="url(#pd-ink)"/><ellipse class="s-ink" cx="200.0" cy="200" rx="22" ry="34"/>
+              <rect class="s-ink plate" x="249.4" y="100" width="42" height="26" rx="3"/><text class="cv-n" x="270.4" y="118" text-anchor="middle">15</text><ellipse cx="270.4" cy="200" rx="22" ry="34" fill="url(#pd-ink)"/><ellipse class="s-ink" cx="270.4" cy="200" rx="22" ry="34"/>
+              <rect class="s-ink plate" x="319.8" y="100" width="42" height="26" rx="3"/><text class="cv-n" x="340.8" y="118" text-anchor="middle">16</text><ellipse cx="340.8" cy="200" rx="22" ry="34" fill="url(#pd-ink)"/><ellipse class="s-ink" cx="340.8" cy="200" rx="22" ry="34"/>
+              <g class="stall-box">
+                <rect class="s-acc" x="-27" y="94" width="54" height="38" rx="4"/>
+                <path class="s-acc" d="M-27 104v-10h10M27 104v-10h-10M-27 122v10h10M27 122v10h-10" stroke-width="3.5"/>
+                <text class="cv-t acc sl0" x="0" y="82" text-anchor="middle">stall 13</text><text class="cv-t acc sl1" x="0" y="82" text-anchor="middle">stall 15</text><text class="cv-t acc sl2" x="0" y="82" text-anchor="middle">stall 12</text><text class="cv-t acc sl3" x="0" y="82" text-anchor="middle">stall 16</text><text class="cv-t acc sl4" x="0" y="82" text-anchor="middle">stall 14</text>
+              </g>
+              <text class="cv-t" x="24" y="278">ResNet50 reads the plate</text>
+            </svg>
+            </div>
+            <p class="card-tag"><span>Computer vision</span><span>2025</span></p>
+            <h3 class="card-title">Cow stall number detection</h3>
+            <p class="card-text">Detecting the stall numbers of cows with a pre-trained ResNet50 model.</p>
+            <p class="card-meta">Jupyter Notebook <span aria-hidden="true">/</span> GitHub <span class="arr" aria-hidden="true">↗</span></p>
+          </a>
+          <a class="card" href="https://github.com/bhansalijainam/bike-demand-prediction" target="_blank" rel="noopener" data-cursor="Open">
+            <div class="cover">
+            <svg class="cv cv-bike" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+              <line class="s-ink" x1="30" x2="372" y1="244" y2="244"/>
+              <rect class="f-ink" x="40" y="174" width="15" height="70" rx="2"/>
+              <rect class="f-ink" x="63" y="148" width="15" height="96" rx="2"/>
+              <rect class="f-ink" x="86" y="124" width="15" height="120" rx="2"/>
+              <rect class="f-ink" x="109" y="156" width="15" height="88" rx="2"/>
+              <rect class="f-ink" x="132" y="184" width="15" height="60" rx="2"/>
+              <rect class="f-ink" x="155" y="140" width="15" height="104" rx="2"/>
+              <rect class="f-ink" x="178" y="112" width="15" height="132" rx="2"/>
+              <rect class="f-ink" x="201" y="94" width="15" height="150" rx="2"/>
+              <rect class="f-ink" x="224" y="126" width="15" height="118" rx="2"/>
+              <line class="s-ink dots" x1="243" x2="243" y1="50" y2="244"/><text class="cv-t" x="250" y="58">today</text>
+              <g class="fc f0"><rect x="247" y="152" width="15" height="92" rx="2" fill="url(#pd-acc)"/><rect class="s-acc dash" x="247" y="152" width="15" height="92" rx="2"/></g>
+              <g class="fc f1"><rect x="270" y="118" width="15" height="126" rx="2" fill="url(#pd-acc)"/><rect class="s-acc dash" x="270" y="118" width="15" height="126" rx="2"/></g>
+              <g class="fc f2"><rect x="293" y="86" width="15" height="158" rx="2" fill="url(#pd-acc)"/><rect class="s-acc dash" x="293" y="86" width="15" height="158" rx="2"/></g>
+              <g class="fc f3"><rect x="316" y="104" width="15" height="140" rx="2" fill="url(#pd-acc)"/><rect class="s-acc dash" x="316" y="104" width="15" height="140" rx="2"/></g>
+              <g class="fc f4"><rect x="339" y="136" width="15" height="108" rx="2" fill="url(#pd-acc)"/><rect class="s-acc dash" x="339" y="136" width="15" height="108" rx="2"/></g>
+              <polyline class="s-ink bike-line" points="47.5,164.0 70.5,138.0 93.5,114.0 116.5,146.0 139.5,174.0 162.5,130.0 185.5,102.0 208.5,84.0 231.5,116.0 254.5,142.0 277.5,108.0 300.5,76.0 323.5,94.0 346.5,126.0" pathLength="1"/>
+              <text class="cv-t" x="30" y="278">Demand: history, then forecast</text>
+            </svg>
+            </div>
+            <p class="card-tag"><span>Forecasting</span><span>2025</span></p>
+            <h3 class="card-title">Bike demand prediction</h3>
+            <p class="card-text">A machine learning model that forecasts daily bike-sharing demand from weather, seasonality and user behavior.</p>
+            <p class="card-meta">Jupyter Notebook <span aria-hidden="true">/</span> GitHub <span class="arr" aria-hidden="true">↗</span></p>
+          </a>
+          <a class="card" href="https://github.com/bhansalijainam/housing-price-regression-model" target="_blank" rel="noopener" data-cursor="Open">
+            <div class="cover">
+            <svg class="cv cv-reg" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+              <path class="s-ink" d="M44 34v212h330"/>
+              <g class="s-ink reg-res"><line x1="65.7" x2="65.7" y1="188.7" y2="228.8"/><line x1="74.4" x2="74.4" y1="208.1" y2="223.9"/><line x1="83.2" x2="83.2" y1="208.6" y2="219.0"/><line x1="91.9" x2="91.9" y1="207.8" y2="214.2"/><line x1="101.2" x2="101.2" y1="211.2" y2="208.9"/><line x1="107.8" x2="107.8" y1="197.1" y2="205.2"/><line x1="115.1" x2="115.1" y1="211.8" y2="201.1"/><line x1="123.5" x2="123.5" y1="169.3" y2="196.5"/><line x1="137.7" x2="137.7" y1="215.5" y2="188.5"/><line x1="144.1" x2="144.1" y1="178.8" y2="184.9"/><line x1="149.9" x2="149.9" y1="204.8" y2="181.6"/><line x1="158.0" x2="158.0" y1="179.3" y2="177.1"/><line x1="167.3" x2="167.3" y1="172.1" y2="171.9"/><line x1="177.6" x2="177.6" y1="170.8" y2="166.2"/><line x1="186.0" x2="186.0" y1="174.0" y2="161.4"/><line x1="195.8" x2="195.8" y1="136.7" y2="155.9"/><line x1="203.6" x2="203.6" y1="140.6" y2="151.6"/><line x1="210.9" x2="210.9" y1="129.6" y2="147.5"/><line x1="223.8" x2="223.8" y1="176.7" y2="140.3"/><line x1="230.6" x2="230.6" y1="135.5" y2="136.4"/><line x1="236.9" x2="236.9" y1="134.9" y2="132.9"/><line x1="244.0" x2="244.0" y1="144.5" y2="128.9"/><line x1="256.8" x2="256.8" y1="92.0" y2="121.8"/><line x1="263.1" x2="263.1" y1="139.8" y2="118.3"/><line x1="275.1" x2="275.1" y1="111.9" y2="111.5"/><line x1="279.3" x2="279.3" y1="108.7" y2="109.2"/><line x1="292.1" x2="292.1" y1="49.7" y2="102.0"/><line x1="297.6" x2="297.6" y1="108.9" y2="99.0"/><line x1="304.2" x2="304.2" y1="72.6" y2="95.2"/><line x1="314.0" x2="314.0" y1="65.8" y2="89.7"/><line x1="321.5" x2="321.5" y1="61.2" y2="85.5"/><line x1="334.1" x2="334.1" y1="121.0" y2="78.5"/><line x1="338.9" x2="338.9" y1="76.0" y2="75.8"/><line x1="347.2" x2="347.2" y1="80.0" y2="71.2"/></g>
+              <g class="f-ink"><circle cx="65.7" cy="188.7" r="2.8"/><circle cx="74.4" cy="208.1" r="2.8"/><circle cx="83.2" cy="208.6" r="2.8"/><circle cx="91.9" cy="207.8" r="2.8"/><circle cx="101.2" cy="211.2" r="2.8"/><circle cx="107.8" cy="197.1" r="2.8"/><circle cx="115.1" cy="211.8" r="2.8"/><circle cx="123.5" cy="169.3" r="2.8"/><circle cx="137.7" cy="215.5" r="2.8"/><circle cx="144.1" cy="178.8" r="2.8"/><circle cx="149.9" cy="204.8" r="2.8"/><circle cx="158.0" cy="179.3" r="2.8"/><circle cx="167.3" cy="172.1" r="2.8"/><circle cx="177.6" cy="170.8" r="2.8"/><circle cx="186.0" cy="174.0" r="2.8"/><circle cx="195.8" cy="136.7" r="2.8"/><circle cx="203.6" cy="140.6" r="2.8"/><circle cx="210.9" cy="129.6" r="2.8"/><circle cx="223.8" cy="176.7" r="2.8"/><circle cx="230.6" cy="135.5" r="2.8"/><circle cx="236.9" cy="134.9" r="2.8"/><circle cx="244.0" cy="144.5" r="2.8"/><circle cx="256.8" cy="92.0" r="2.8"/><circle cx="263.1" cy="139.8" r="2.8"/><circle cx="275.1" cy="111.9" r="2.8"/><circle cx="279.3" cy="108.7" r="2.8"/><circle cx="292.1" cy="49.7" r="2.8"/><circle cx="297.6" cy="108.9" r="2.8"/><circle cx="304.2" cy="72.6" r="2.8"/><circle cx="314.0" cy="65.8" r="2.8"/><circle cx="321.5" cy="61.2" r="2.8"/><circle cx="334.1" cy="121.0" r="2.8"/><circle cx="338.9" cy="76.0" r="2.8"/><circle cx="347.2" cy="80.0" r="2.8"/></g>
+              <line class="s-acc reg-line" x1="56" x2="366" y1="234.2" y2="60.6"/>
+              <text class="cv-t" x="52" y="268">size</text><text class="cv-t" x="-140" y="32" transform="rotate(-90)">price</text>
+              <text class="cv-t" x="236" y="278" text-anchor="start">Fit, then residuals</text>
+            </svg>
+            </div>
+            <p class="card-tag"><span>Regression</span><span>2025</span></p>
+            <h3 class="card-title">Housing price regression</h3>
+            <p class="card-text">A regression model that predicts Australian housing prices to guide real estate investment.</p>
+            <p class="card-meta">Jupyter Notebook <span aria-hidden="true">/</span> GitHub <span class="arr" aria-hidden="true">↗</span></p>
+          </a>
+          <a class="card" href="https://github.com/bhansalijainam/lead-conversion-predictor" target="_blank" rel="noopener" data-cursor="Open">
+            <div class="cover">
+            <svg class="cv cv-lead" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+              <line class="s-ink" x1="30" x2="372" y1="246" y2="246"/>
+              <line class="s-ink dots" x1="200" x2="200" y1="44" y2="246"/><text class="cv-t" x="207" y="54">0.5</text>
+              <path class="s-acc lead-curve" d="M36,235.6 L42,235.5 L48,235.4 L54,235.2 L60,235.1 L66,234.8 L72,234.5 L78,234.2 L84,233.7 L90,233.2 L96,232.5 L102,231.6 L108,230.5 L114,229.2 L120,227.6 L126,225.7 L132,223.3 L138,220.5 L144,217.0 L150,212.9 L156,208.1 L162,202.6 L168,196.2 L174,189.0 L180,181.1 L186,172.6 L192,163.5 L198,154.1 L204,144.7 L210,135.4 L216,126.5 L222,118.2 L228,110.5 L234,103.6 L240,97.5 L246,92.2 L252,87.6 L258,83.8 L264,80.5 L270,77.8 L276,75.6 L282,73.8 L288,72.3 L294,71.1 L300,70.1 L306,69.3 L312,68.6 L318,68.1 L324,67.7 L330,67.4 L336,67.1 L342,66.9 L348,66.7 L354,66.6 L360,66.5" pathLength="1"/>
+              <circle class="s-ink pop" style="--k:0" cx="40.0" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:1" cx="40.0" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:2" cx="70.2" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:3" cx="73.8" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:4" cx="75.2" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:5" cx="94.0" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:6" cx="104.8" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:7" cx="114.8" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:8" cx="121.4" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:9" cx="134.7" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:10" cx="137.3" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:11" cx="146.3" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:12" cx="158.8" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:13" cx="178.6" cy="236" r="4"/>
+              <circle class="s-ink pop" style="--k:14" cx="190.4" cy="236" r="4"/>
+              <circle class="f-acc pop" style="--k:15" cx="246.2" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:16" cx="249.0" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:17" cx="253.9" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:18" cx="255.1" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:19" cx="256.4" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:20" cx="256.6" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:21" cx="273.0" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:22" cx="274.5" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:23" cx="274.6" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:24" cx="279.0" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:25" cx="279.7" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:26" cx="301.7" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:27" cx="302.7" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:28" cx="360.0" cy="66" r="4.4"/>
+              <circle class="f-acc pop" style="--k:29" cx="360.0" cy="66" r="4.4"/>
+              <text class="cv-t" x="30" y="38">converted</text><text class="cv-t" x="30" y="278">not yet</text>
+            </svg>
+            </div>
+            <p class="card-tag"><span>Classification</span><span>2025</span></p>
+            <h3 class="card-title">Lead conversion predictor</h3>
+            <p class="card-text">A logistic regression model that finds high-potential leads in a marketing funnel from behavioral and source data.</p>
+            <p class="card-meta">Jupyter Notebook <span aria-hidden="true">/</span> GitHub <span class="arr" aria-hidden="true">↗</span></p>
+          </a>
+          <a class="card card-more" href="https://github.com/bhansalijainam?tab=repositories" target="_blank" rel="noopener" data-cursor="GitHub">
+            <p class="card-more-n">10</p>
+            <p class="card-more-t">more repositories on GitHub, from AI web apps to notebooks.</p>
+            <span class="arr" aria-hidden="true">↗</span>
+          </a>
           </div>
-          <a class="btn" data-reveal href="https://github.com/bhansalijainam?tab=repositories" target="_blank" rel="noopener">All repositories</a>
-        </div>
 
-        <div class="projects">
-          <a class="project project-lg" data-reveal data-tilt href="https://github.com/bhansalijainam/Lung-Segmentation-using-U-Net-A-Comparative-Study-on-CT-Images" target="_blank" rel="noopener">
-            <p class="project-top"><span class="project-tag">Computer vision</span><span class="project-arrow" aria-hidden="true">↗</span></p>
-            <h3 class="h3">Lung segmentation with U-Net</h3>
-            <p class="project-text">A comparative study of U-Net models for segmenting lungs in CT images.</p>
-            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
-          </a>
-          <a class="project project-lg" data-reveal data-tilt href="https://github.com/bhansalijainam/Stall-Number-Detection-of-Cows-using-a-Pre-trained-ResNet50-Model" target="_blank" rel="noopener">
-            <p class="project-top"><span class="project-tag">Computer vision</span><span class="project-arrow" aria-hidden="true">↗</span></p>
-            <h3 class="h3">Cow stall number detection</h3>
-            <p class="project-text">Detecting the stall numbers of cows with a pre-trained ResNet50 model.</p>
-            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
-          </a>
-          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/bike-demand-prediction" target="_blank" rel="noopener">
-            <p class="project-top"><span class="project-tag">Forecasting</span><span class="project-arrow" aria-hidden="true">↗</span></p>
-            <h3 class="h3">Bike demand prediction</h3>
-            <p class="project-text">A machine learning model that forecasts daily bike-sharing demand from weather, seasonality and user behavior.</p>
-            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
-          </a>
-          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/housing-price-regression-model" target="_blank" rel="noopener">
-            <p class="project-top"><span class="project-tag">Regression</span><span class="project-arrow" aria-hidden="true">↗</span></p>
-            <h3 class="h3">Housing price regression</h3>
-            <p class="project-text">A regression model that predicts Australian housing prices to guide real estate investment.</p>
-            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
-          </a>
-          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/lead-conversion-predictor" target="_blank" rel="noopener">
-            <p class="project-top"><span class="project-tag">Classification</span><span class="project-arrow" aria-hidden="true">↗</span></p>
-            <h3 class="h3">Lead conversion predictor</h3>
-            <p class="project-text">A logistic regression model that finds high-potential leads in a marketing funnel from behavioral and source data.</p>
-            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
-          </a>
+          <div class="work-bar wrap" aria-hidden="true"><span id="work-bar"></span></div>
         </div>
+      </div>
 
-        <div class="repos" data-reveal>
-          <h3 class="kit-title">More repositories</h3>
-          <ul class="repo-list">
-            <li><a href="https://github.com/bhansalijainam/tax-companion-ai" target="_blank" rel="noopener"><span class="repo-name">tax-companion-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2026</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/Neural-project" target="_blank" rel="noopener"><span class="repo-name">Neural-project</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2026</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/finzen-spark-ai-lens" target="_blank" rel="noopener"><span class="repo-name">finzen-spark-ai-lens</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/financeflow" target="_blank" rel="noopener"><span class="repo-name">financeflow</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/expensemanager" target="_blank" rel="noopener"><span class="repo-name">expensemanager</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/murmur-ai" target="_blank" rel="noopener"><span class="repo-name">murmur-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/DraftFlo" target="_blank" rel="noopener"><span class="repo-name">DraftFlo</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/hireai-spark" target="_blank" rel="noopener"><span class="repo-name">hireai-spark</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/chat-bot" target="_blank" rel="noopener"><span class="repo-name">chat-bot</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2024</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/bhansalijainam/VETGPT" target="_blank" rel="noopener"><span class="repo-name">VETGPT</span><span class="repo-lang">Python</span><span class="repo-year">2024</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
-          </ul>
-        </div>
+      <div class="repos wrap">
+        <h3 class="repos-title">More repositories</h3>
+        <ul class="repo-list">
+            <li><a href="https://github.com/bhansalijainam/tax-companion-ai" target="_blank" rel="noopener"><span class="repo-name">tax-companion-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2026</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/Neural-project" target="_blank" rel="noopener"><span class="repo-name">Neural-project</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2026</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/finzen-spark-ai-lens" target="_blank" rel="noopener"><span class="repo-name">finzen-spark-ai-lens</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/financeflow" target="_blank" rel="noopener"><span class="repo-name">financeflow</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/expensemanager" target="_blank" rel="noopener"><span class="repo-name">expensemanager</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/murmur-ai" target="_blank" rel="noopener"><span class="repo-name">murmur-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/DraftFlo" target="_blank" rel="noopener"><span class="repo-name">DraftFlo</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/hireai-spark" target="_blank" rel="noopener"><span class="repo-name">hireai-spark</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/chat-bot" target="_blank" rel="noopener"><span class="repo-name">chat-bot</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2024</span><span class="arr" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/VETGPT" target="_blank" rel="noopener"><span class="repo-name">VETGPT</span><span class="repo-lang">Python</span><span class="repo-year">2024</span><span class="arr" aria-hidden="true">↗</span></a></li>
+        </ul>
       </div>
     </section>
 
     <!-- PATH -->
-    <section class="section" id="path">
-      <div class="wrap">
-        <p class="label" data-reveal>Path</p>
-        <h2 class="h2" data-reveal>Education and experience</h2>
+    <section class="path wrap" id="path" data-theme="paper">
+      <header class="sec-head">
+        <p class="label">Path</p>
+        <h2 class="h2" data-words>Experience and education.</h2>
+      </header>
 
-        <ol class="path-list" id="path-list">
-
-          <li class="path-item" data-reveal>
-            <p class="path-when">Sep 2023<span>to</span>Dec 2024</p>
-            <div class="path-body">
-              <p class="path-kind">Education</p>
-              <h3 class="h3">M.S. in Artificial Intelligence</h3>
-              <p class="path-where">Yeshiva University <span>New York, NY</span></p>
-              <p>
-                Specialized in neural networks, NLP and applied AI. My main project
-                was fine-tuning large language models, improving both performance and
-                deployment efficiency.
-              </p>
-            </div>
-          </li>
-
-          <li class="path-item" data-reveal>
-            <p class="path-when">Mar 2022<span>to</span>Dec 2022</p>
-            <div class="path-body">
-              <p class="path-kind">Education</p>
-              <h3 class="h3">Postgraduate program in Data Science</h3>
-              <p class="path-where">IIT Bangalore <span>Bangalore, India</span></p>
-              <p>
-                Business analytics, exploratory data analysis and core modeling
-                techniques, including logistic regression and decision trees, using
-                Python and Tableau.
-              </p>
-            </div>
-          </li>
-
-          <li class="path-item" data-reveal>
-            <p class="path-when">Aug 2020<span>to</span>Dec 2022</p>
-            <div class="path-body">
-              <p class="path-kind path-kind-work">Experience</p>
-              <h3 class="h3">Senior Executive, Software Testing</h3>
-              <p class="path-where">VOIS <span>Pune, India</span></p>
-              <ul class="path-points">
-                <li>Tested software as a senior test engineer for over two years.</li>
-                <li>Used Jira, Jenkins, TTWOS, ALM and SQL to streamline test cycles and protect release quality.</li>
-                <li>Ran requirement analysis, defect management and QA testing, from sanity and regression runs to test case design.</li>
-                <li>Received the Star Award for contributions that benefited the whole team.</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="path-item" data-reveal>
-            <p class="path-when">Jul 2016<span>to</span>Sep 2020</p>
-            <div class="path-body">
-              <p class="path-kind">Education</p>
-              <h3 class="h3">B.Tech in Computer Science and Engineering</h3>
-              <p class="path-where">Vellore Institute of Technology <span>Chennai, India</span></p>
-              <p>
-                Data structures and algorithms, object-oriented programming, database
-                systems, large-scale data systems, machine learning, natural language
-                processing, operating systems and applied linear algebra.
-              </p>
-            </div>
-          </li>
-
-        </ol>
-      </div>
+      <ol class="path-list">
+        <li class="path-row" data-reveal>
+          <p class="path-when">2023 to 2024</p>
+          <div class="path-what">
+            <h3>M.S. in Artificial Intelligence</h3>
+            <p>Yeshiva University, New York</p>
+          </div>
+          <p class="path-text">Neural networks, NLP and applied AI. My main project was fine-tuning large language models for better performance and cheaper deployment.</p>
+        </li>
+        <li class="path-row" data-reveal>
+          <p class="path-when">2022</p>
+          <div class="path-what">
+            <h3>Postgraduate program in Data Science</h3>
+            <p>IIT Bangalore</p>
+          </div>
+          <p class="path-text">Business analytics, exploratory data analysis, logistic regression and decision trees, in Python and Tableau.</p>
+        </li>
+        <li class="path-row" data-reveal>
+          <p class="path-when">2020 to 2022</p>
+          <div class="path-what">
+            <h3>Senior Executive, Software Testing</h3>
+            <p>VOIS, Pune</p>
+          </div>
+          <p class="path-text">Requirement analysis, test case design, sanity and regression testing, and defect management with Jira, Jenkins, TTWOS, ALM and SQL. Star Award for contributions to the team.</p>
+        </li>
+        <li class="path-row" data-reveal>
+          <p class="path-when">2016 to 2020</p>
+          <div class="path-what">
+            <h3>B.Tech in Computer Science and Engineering</h3>
+            <p>Vellore Institute of Technology, Chennai</p>
+          </div>
+          <p class="path-text">Data structures and algorithms, databases, large-scale data systems, machine learning, NLP, operating systems and applied linear algebra.</p>
+        </li>
+      </ol>
     </section>
 
     <!-- TOOLKIT -->
-    <section class="section" id="toolkit">
-      <div class="wrap">
-        <p class="label" data-reveal>Toolkit</p>
-        <h2 class="h2" data-reveal>What I work with</h2>
-
-        <div class="kit">
-
-          <div class="kit-group" data-reveal>
-            <h3 class="kit-title">Languages</h3>
-            <ul class="kit-list">
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/python.png" alt="" width="40" height="40" loading="lazy"></span>Python</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/sql.png" alt="" width="40" height="40" loading="lazy"></span>SQL</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/js.png" alt="" width="40" height="40" loading="lazy"></span>JavaScript</li>
-            </ul>
-          </div>
-
-          <div class="kit-group" data-reveal>
-            <h3 class="kit-title">Frameworks and libraries</h3>
-            <ul class="kit-list">
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/pytorch.png" alt="" width="40" height="40" loading="lazy"></span>PyTorch</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/tensorflow.png" alt="" width="40" height="40" loading="lazy"></span>TensorFlow</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/huggingface.png" alt="" width="40" height="40" loading="lazy"></span>Hugging Face</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/numpy.png" alt="" width="40" height="40" loading="lazy"></span>NumPy</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/pandas.png" alt="" width="40" height="40" loading="lazy"></span>Pandas</li>
-            </ul>
-          </div>
-
-          <div class="kit-group" data-reveal>
-            <h3 class="kit-title">Data and web</h3>
-            <ul class="kit-list">
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/postgressql.png" alt="" width="40" height="40" loading="lazy"></span>PostgreSQL</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/mysql.png" alt="" width="40" height="40" loading="lazy"></span>MySQL</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/tableau.svg" alt="" width="40" height="40" loading="lazy"></span>Tableau</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/html.png" alt="" width="40" height="40" loading="lazy"></span>HTML</li>
-              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/css-3.png" alt="" width="40" height="40" loading="lazy"></span>CSS</li>
-            </ul>
-          </div>
-
-          <div class="kit-group" data-reveal>
-            <h3 class="kit-title">Testing and delivery</h3>
-            <p class="kit-plain">Jira <span>/</span> Jenkins <span>/</span> ALM <span>/</span> TTWOS <span>/</span> Regression and sanity testing <span>/</span> Test case design <span>/</span> Defect management</p>
-          </div>
-
-        </div>
-      </div>
+    <section class="kit" data-theme="paper" aria-label="Toolkit">
+      <p class="label wrap">Toolkit</p>
+      <div class="mq" data-marquee="-1"><div class="mq-in"><span>Python</span><i></i><span>PyTorch</span><i></i><span>TensorFlow</span><i></i><span>Hugging Face</span><i></i><span>NumPy</span><i></i><span>Pandas</span><i></i><span>SQL</span><i></i></div></div>
+      <div class="mq mq-out" data-marquee="1"><div class="mq-in"><span>PostgreSQL</span><i></i><span>MySQL</span><i></i><span>Tableau</span><i></i><span>TypeScript</span><i></i><span>JavaScript</span><i></i><span>Jira</span><i></i><span>Jenkins</span><i></i></div></div>
     </section>
 
     <!-- CONTACT -->
-    <section class="section section-contact" id="contact">
-      <div class="wrap contact">
-        <div class="contact-copy">
-          <p class="label" data-reveal>Contact</p>
-          <h2 class="h2 h2-xl" data-reveal>Let's build.</h2>
-          <p class="body-lg" data-reveal>
-            I'm open to forward deployed engineer and applied AI roles, and to
-            freelance projects. Tell me what you're trying to ship and I'll reply
-            with how I'd approach it.
+    <section class="contact" id="contact" data-theme="ink">
+      <div class="contact-grid wrap">
+        <div class="contact-body">
+          <p class="label">Contact</p>
+          <h2 class="contact-title" data-words>Got a messy problem?</h2>
+          <p class="contact-lede" data-reveal>Tell me what you're trying to ship. I'll reply with how I'd approach it.</p>
+
+          <p class="contact-mail" data-reveal>
+            <a href="mailto:jbhansal@mail.yu.edu" id="mail">jbhansal@mail.yu.edu</a>
+            <button class="copy" type="button" data-copy="jbhansal@mail.yu.edu">Copy</button>
           </p>
 
-          <ul class="contact-list" data-reveal>
-            <li>
-              <span>Email</span>
-              <a href="mailto:jbhansal@mail.yu.edu">jbhansal@mail.yu.edu</a>
-            </li>
-            <li>
-              <span>Phone</span>
-              <a href="tel:+15512608817">+1 (551) 260-8817</a>
-            </li>
-            <li>
-              <span>Based in</span>
-              <address>Jersey City, NJ, USA</address>
-            </li>
-            <li>
-              <span>Elsewhere</span>
-              <span class="contact-social">
-                <a href="https://www.linkedin.com/in/jainam-bhansali/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://github.com/bhansalijainam" target="_blank" rel="noopener">GitHub</a>
-              </span>
-            </li>
-          </ul>
+          <dl class="contact-list" data-reveal>
+            <div><dt>Phone</dt><dd><a href="tel:+15512608817">+1 (551) 260-8817</a></dd></div>
+            <div><dt>Based in</dt><dd>Jersey City, NJ <span class="clock" data-clock></span></dd></div>
+            <div><dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/jainam-bhansali/" target="_blank" rel="noopener">LinkedIn</a> <a href="https://github.com/bhansalijainam" target="_blank" rel="noopener">GitHub</a></dd></div>
+          </dl>
+
+          <form class="form" data-reveal target="_blank"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSei8E1bL8hY4vc9cAr3eOTFON0dvtRPg6bi_RLJKWM2v6S1Kw/viewform">
+            <p class="form-title">Or leave a message</p>
+            <div class="field">
+              <label for="f-name">Full name</label>
+              <input id="f-name" type="text" name="entry.1325375650" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email address</label>
+              <input id="f-email" type="email" name="entry.45159176" autocomplete="email" required>
+            </div>
+            <div class="field field-wide">
+              <label for="f-msg">What are you trying to build?</label>
+              <textarea id="f-msg" name="entry.2104378170" rows="3" required></textarea>
+            </div>
+            <button class="btn btn-line" type="submit"><span>Continue to send</span><i aria-hidden="true"></i></button>
+            <p class="form-note">Opens a Google Form with your message filled in. Submit it there to send.</p>
+          </form>
         </div>
 
-        <form class="form" data-reveal target="_blank"
-          action="https://docs.google.com/forms/d/e/1FAIpQLSei8E1bL8hY4vc9cAr3eOTFON0dvtRPg6bi_RLJKWM2v6S1Kw/viewform">
-          <div class="field">
-            <label for="f-name">Full name</label>
-            <input id="f-name" type="text" name="entry.1325375650" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="f-email">Email address</label>
-            <input id="f-email" type="email" name="entry.45159176" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="f-msg">What are you trying to build?</label>
-            <textarea id="f-msg" name="entry.2104378170" rows="5" required></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit">Continue to send</button>
-          <p class="form-note">Opens a Google Form with your message filled in. Submit it there to send.</p>
-        </form>
+        <div class="contact-side" aria-hidden="true">
+          <div class="contact-slot" id="slot-globe"></div>
+          <p class="globe-note"><span class="pulse"></span>Jersey City <span>40.72° N, 74.04° W</span></p>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>© <span id="year">2026</span> Jainam Bhansali</p>
-      <p class="footer-note">The terrain behind this page is a loss surface. Scrolling moves the optimizer from a loss of 2.303 down to its minimum.</p>
-    </div>
+  <footer class="footer wrap" data-theme="ink">
+    <p>© <span id="year">2026</span> Jainam Bhansali</p>
+    <p class="footer-note">The portrait, the stack and the globe are the same 27,000 dots, drawn live in your browser.</p>
+    <a class="link" href="#top">Back to top</a>
   </footer>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
 
   <script type="module" src="./assets/js/main.js"></script>
 </body>
