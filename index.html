@@ -3,697 +3,434 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jainam Bhansali Portfolio</title>
+  <title>Jainam Bhansali · Applied AI Engineer</title>
+  <meta name="description" content="Jainam Bhansali is an applied AI engineer in Jersey City, NJ, open to forward deployed engineer and applied AI roles and to freelance projects. M.S. in Artificial Intelligence, Yeshiva University.">
+  <meta name="theme-color" content="#110a22">
+  <meta property="og:title" content="Jainam Bhansali · Applied AI Engineer">
+  <meta property="og:description" content="Applied AI engineer, open to forward deployed and applied AI roles and to freelance projects.">
+  <meta property="og:type" content="website">
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/slogo.png" type="image/x-icon">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23110a22'/%3E%3Cpath d='M8 26c10-10 20 12 30 2s12-10 18-6' fill='none' stroke='%2321918c' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M8 40c10-10 20 12 30 2s12-10 18-6' fill='none' stroke='%235ec962' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='44' r='7' fill='%23fde725'/%3E%3C/svg%3E">
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
-  
-  <!-- 
-    Ref for particles:- https://vincentgarreau.com/particles.js/
-  -->
 
-  <div id="particles-js"></div>
-    <!-- count particles -->
-  <div class="count-particles">
-  <!--
-    - #MAIN
-  -->
-
-    <main>
-
-      <!--
-        - #SIDEBAR
-      -->
-      <aside class="sidebar" data-sidebar>
-
-        <div class="sidebar-info">
-
-          <figure class="avatar-box">
-            <img src="./assets/images/Profile.png" alt="Jainam Bhansali" width="80">
-          </figure>
-
-          <div class="info-content">
-            <h1 class="name" title="Jainam Bhansali">Jainam Bhansali</h1>
-
-            <p class="title">AI Enthusisat</p>
-          </div>
-
-          <button class="info_more-btn" data-sidebar-btn>
-            <span>Show Contacts</span>
-
-            <ion-icon name="chevron-down"></ion-icon>
-          </button>
-
-        </div>
-
-        <div class="sidebar-info_more">
-
-          <div class="separator"></div>
-
-          <ul class="contacts-list">
-
-            <li class="contact-item">
-
-              <div class="icon-box">
-                <ion-icon name="mail-outline"></ion-icon>
-              </div>
-
-              <div class="contact-info">
-                <p class="contact-title">Email</p>
-
-                <a href="mailto:jbhansal@mail.yu.edu" class="contact-link">jbhansal@mail.yu.edu</a>
-              </div>
-
-            </li>
-
-            <li class="contact-item">
-
-              <div class="icon-box">
-                <ion-icon name="phone-portrait-outline"></ion-icon>
-              </div>
-
-              <div class="contact-info">
-                <p class="contact-title">Phone</p>
-
-                <a href="tel:+15512608817" class="contact-link">+1 (551) 260-8817</a>
-              </div>
-
-            </li>
-
-            <li class="contact-item">
-
-              <div class="icon-box">
-                <ion-icon name="calendar-outline"></ion-icon>
-              </div>
-
-              <div class="contact-info">
-                <p class="contact-title">Birthday</p>
-
-                <time datetime="1998-11-26">Nov 26, 1998</time>
-              </div>
-
-            </li>
-
-            <li class="contact-item">
-
-              <div class="icon-box">
-                <ion-icon name="location-outline"></ion-icon>
-              </div>
-
-              <div class="contact-info">
-                <p class="contact-title">Location</p>
-
-                <address>Jersey City, NJ, USA</address>
-              </div>
-
-            </li>
-
-          </ul>
-
-          <div class="separator"></div>
-
-          <ul class="social-list">
-
-            <li class="social-item">
-              <a href="https://www.linkedin.com/in/jainam-bhansali/" class="social-link" target="_blank">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-
-            <li class="social-item">
-              <a href="https://github.com/bhansalijainam" class="social-link" target="_blank">
-                <ion-icon name="logo-github"></ion-icon>
-              </a>
-            </li>
-
-
-          </ul>
-
-        </div>
-
-      </aside>
-
-
-      <!--
-        - #main-content
-      -->
-
-      <div class="main-content">
-
-        <!--
-          - #NAVBAR
-        -->
-
-        <nav class="navbar">
-
-          <ul class="navbar-list">
-
-            <li class="navbar-item">
-              <button class="navbar-link  active" data-nav-link>About</button>
-            </li>
-
-            <li class="navbar-item">
-              <button class="navbar-link" data-nav-link>Resume</button>
-            </li>
-
-            <!-- <li class="navbar-item">
-              <button class="navbar-link" data-nav-link>Projects</button>
-            </li> -->
-
-
-
-            <li class="navbar-item">
-              <button class="navbar-link" data-nav-link>Contact</button>
-            </li>
-
-          </ul>
-
-        </nav>
-
-
-        <!--
-          - #ABOUT
-        -->
-
-        <article class="about  active" data-page="about">
-
-          <header>
-            <h2 class="h2 article-title">About me</h2>
-          </header>
-
-          <section class="about-text">
-            <h1>Hello I'm Jainam Bhansali</h1>
-            <p>I’m a former software test engineer with a strong focus on AI and data science,
-               based in Jersey City, NJ. With a Master’s in Artificial Intelligence from Yeshiva University 
-               and hands-on experience in machine learning, deep learning, and data analysis.
-               I am now actively seeking full-time opportunities in AI, machine learning, and 
-               data science to apply my skills and contribute to cutting-edge projects.
-
-            </p>
-    
-          </section>
-
-
-          <!--
-            - service
-          -->
-
-          <section class="service">
-
-            <h3 class="h3 service-title">What i'm doing</h3>
-
-            <ul class="service-list">
-
-              <li class="service-item">
-
-                <div class="service-icon-box">
-                  <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                  <h4 class="h4 service-item-title">Software Teastig</h4>
-
-                  <p class="service-item-text">
-                    I spent over two years at VOIS, where I refined testing processes and ensured top-notch 
-                    quality. My efforts were recognized with the Star Award, 
-                    which was a rewarding highlight of my time there.
-
-
-                  </p>
-                </div>
-
-              </li>
-
-              <li class="service-item">
-
-                <div class="service-icon-box">
-                  <img src="./assets/images/icon-design.svg
-                  " alt="design icon" width="40">
-                </div>
-
-                <div class="service-content-box">
-                  <h4 class="h4 service-item-title">Data Science</h4>
-
-                  <p class="service-item-text">
-                    I apply advanced techniques to analyze complex data, uncovering valuable insights and driving innovation. 
-                    My work focuses on solving intricate problems and enhancing understanding through data-driven approaches.
-                  </p>
-                </div>
-
-              </li>
-
-
-            </ul>
-
-          </section>
-
-        </article>
-
-
-        <!--
-          - #RESUME
-        -->
-
-        <article class="resume" data-page="resume">
-
-          <header>
-            <h2 class="h2 article-title">Resume</h2>
-          </header>
-
-          <section class="timeline">
-
-            <div class="title-wrapper">
-              <div class="icon-box">
-                <ion-icon name="book-outline"></ion-icon>
-              </div>
-
-              <h3 class="h3">Education</h3>
-            </div>
-
-            <ol class="timeline-list">
-
-              <li class="timeline-item">
-
-                <h4 class="h4 timeline-item-title">Yeshiva University
-                  <span class="right-align">New York, NY, US</span>
-                </h4>
-                
-                <span class="program">Masters in Artificial Intellligenece 
-                  <!-- <a class="about-p-highlight" href="" target="_blank">[degree]</a> -->
-                  <span class="right-align-gold">Sep, 2023 - Dec, 20244</span>
-                </span>
-
-                <p class="timeline-text">
-                  I hold a master’s degree in Artificial Intelligence, specializing in neural networks,
-                   NLP, and AI. My notable project involved fine-tuning Large Language Models (LLMs) like ChatGPT, 
-                  optimizing performance and deployment efficiency
-                </p>
-
-              </li>
-
-              <li class="timeline-item">
-
-                <h4 class="h4 timeline-item-title">IIT Bangalore
-                  <span class="right-align">Bangalore, TN, India</span>
-                </h4>
-
-                <span class="program">Postgraduate Degree in data science 
-                  <span class="right-align-gold">Mar, 2022 - Dec, 2022</span>
-                </span>
-
-                <p class="timeline-text">
-                  I completed a postgraduate program in Data Science, gaining expertise in business analytics, exploratory data analysis (EDA), and various data analytics techniques.
-                   My knowledge spans Python, Tableau, logistic regression, decision trees.
-                   I’m well-equipped to drive business growth and innovation through data-driven insights.
-                </p>
-
-              </li>
-
-              <li class="timeline-item">
-
-                <h4 class="h4 timeline-item-title">Vellore Institute of Technology
-                  <span class="right-align">Chennai, TN, India</span>
-                </h4>
-
-                <span class="program">B.Tech in Computer Science and Engineering
-                  <span class="right-align-gold">Jul, 2016 - Sep, 2020</span>
-                </span>
-
-                <p class="timeline-text">
-                  Data Structures and Algorithms, Object-Oriented Programming, Database and 
-                  Management Systems, Large Scale Data Systems, Machine Learning, Natural Language 
-                  Processing, Operating Systems, Applied Linear Algebra
-                </p>
-
-              </li>
-
-            </ol>
-
-          </section>
-
-          <section class="timeline">
-
-            <div class="title-wrapper">
-              <div class="icon-box">
-                <ion-icon name="book-outline"></ion-icon>
-              </div>
-
-              <h3 class="h3">Experience</h3>
-            </div>
-
-            <ol class="timeline-list">
-
-              <li class="timeline-item">
-
-                <h4 class="h4 timeline-item-title">VOIS
-                  <span class="right-align">Pune, MH, IN</span>
-                </h4>
-
-                <span class="program">Senior Executive
-                  <span class="right-align-gold">Aug, 2020 - Dec, 2022</span>
-                </span>
-
-                <ul>
-
-                  <li class="timeline-text-ul">
-                    <p class="timeline-text-ul-item">
-                      Accomplished Senior Software Test Engineer with 2 years of experience in the Software Testing field.
-                    </p>
-                  </li>
-
-                  <li class="timeline-text-ul">
-                    <p class="timeline-text-ul-item">
-                      Leveraged expertise in Jira, Jenkins, TTWOS, ALM, and SQL to streamline testing processes and ensure software quality.
-                    </p>
-                  </li>
-
-                  <li class="timeline-text-ul">
-                    <p class="timeline-text-ul-item">
-                      Championed customer satisfaction through thorough requirement analysis, meticulous defect management, and comprehensive QA testing, including sanity testing, regression testing, and test case design.
-                    </p>
-                  </li>
-                  <li class="timeline-text-ul">
-                    <p class="timeline-text-ul-item">
-                      Recognized as a Star Award recipient for outstanding contributions that significantly benefited the team.
-                    </p>
-                  </li>
-
-                </ul>
-
-              </li>
-
-              
-          </section>
-
-          <section class="skill">
-
-            <h3 class="h3 skill-title">My skills</h3>
-
-            <!-- 
-              Languages 
-            -->
-
-            <h5 class="h4 skill-category">Languages</h5>
-
-            <ul class="skill-list">
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/python.png" alt="Python icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  Python
-                </div>
-
-              </li>
-
-              
-
-           
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/sql.png" alt="SQL icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  SQL
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/js.png" alt="JavaScript icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  JavaScript
-                </div>
-
-              </li>
-
-            </ul>
-
-            <!-- 
-              Frameworks & Libraries 
-            -->
-
-            <h5 class="h4 skill-category">Frameworks & Libraries</h5>
-
-            <ul class="skill-list">
-
-              
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/pytorch.png" alt="PyTorch icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  PyTorch
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/tensorflow.png" alt="TensorFlow icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  TensorFlow
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/huggingface.png" alt="Hugging Face icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  Hugging Face
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/numpy.png" alt="NumPy icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  NumPy
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/pandas.png" alt="Pandas icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  Pandas
-                </div>
-
-              </li>
-
-              
-
-            </ul>
-
-            <!-- 
-              Tools & OS 
-            -->
-
-            <h5 class="h4 skill-category">Tools & OS</h5>
-
-            <ul class="skill-list">
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/postgressql.png" alt="PostgresSQL" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  PostgresSQL
-                </div>
-
-              </li>
-
-              
-
-              
-
-              
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/mysql.png" alt="MySQL icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  MySQL
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/tableau.svg" alt="Tableau icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  Tableau
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/html.png" alt="HTML icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  HTML
-                </div>
-
-              </li>
-
-              <li class="skill-item">
-
-                <div class="skill-icon-box">
-                  <img src="./assets/images/css-3.png" alt="CSS icon" width="40">
-                </div>
-
-                <div class="skill-content-box">
-                  CSS
-                </div>
-
-              </li>
-
-              
-            </ul>
-
-          </section>
-
-          <!-- 
-            Certifications 
-          -->
-
-          
-          </section>
-
-        </article>
-
-
-        <!--
-          - #PORTFOLIO
-        -->
-
-        
-        <!--
-          - #CONTACT
-        -->
-
-        <article class="contact" data-page="contact">
-
-          <header>
-            <h2 class="h2 article-title">Contact</h2>
-          </header>
-
-<!--           <section class="mapbox" data-mapbox>
-            <figure>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172138.71746958015!2d-122.5068712992255!3d47.6131554410418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C%20WA!5e0!3m2!1sen!2sus!4v1709831216914!5m2!1sen!2sus" 
-                width="400" height="300" 
-                style="border:0;" allowfullscreen="" 
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-              </iframe>
-            </figure>
-          </section> -->
-
-          <section class="contact-form">
-
-            <h3 class="h3 form-title">Contact Form</h3>
-
-            <form 
-              action="https://docs.google.com/forms/d/e/1FAIpQLSei8E1bL8hY4vc9cAr3eOTFON0dvtRPg6bi_RLJKWM2v6S1Kw/viewform" 
-              class="form" target="_blank"
-              data-form>
-
-              <div class="input-wrapper">
-                <input type="text" name="entry.1325375650" class="form-input" placeholder="Full name" required data-form-input>
-
-                <input type="email" name="entry.45159176" class="form-input" placeholder="Email address" required data-form-input>
-              </div>
-
-              <textarea name="entry.2104378170" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-              <button class="form-btn" type="submit" disabled data-form-btn>
-                <ion-icon name="paper-plane"></ion-icon>
-                <span>Send Message</span>
-              </button>
-
-            </form>
-
-          </section>
-
-        </article>
-
-      </div>
-
-    </main>
-
+  <!-- 3D loss landscape, drawn by assets/js/scene.js -->
+  <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+
+  <a class="skip" href="#about">Skip to content</a>
+
+  <header class="nav">
+    <a class="nav-mark" href="#top" aria-label="Jainam Bhansali, back to top">
+      <span class="nav-dot" aria-hidden="true"></span>
+      <span>Jainam Bhansali</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#path">Path</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <p class="hud" aria-hidden="true">
+      <span class="hud-step">step <b id="hud-step">0000</b></span>
+      <span>loss <b id="hud-loss">2.303</b></span>
+    </p>
+  </header>
+
+  <!-- colorbar: the same scale the landscape is painted with -->
+  <div class="colorbar" aria-hidden="true">
+    <span class="colorbar-label">loss</span>
+    <div class="colorbar-track">
+      <span class="colorbar-marker" id="colorbar-marker"></span>
+    </div>
+    <ol class="colorbar-ticks">
+      <li>2.3</li>
+      <li>1.7</li>
+      <li>1.2</li>
+      <li>0.6</li>
+      <li>0.0</li>
+    </ol>
   </div>
 
-  <!-- scripts -->
-  <script src="assets/js/particles.js"></script>
-  <script src="assets/js/app.js"></script>
+  <main id="top">
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow" data-load>
+          <span class="status-dot" aria-hidden="true"></span>
+          Jersey City, NJ <span class="sep">/</span> Open to forward deployed, applied AI and freelance work
+        </p>
 
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <h1 class="hero-name">
+          <span class="line"><span data-load>Jainam</span></span>
+          <span class="line"><span data-load>Bhansali</span></span>
+        </h1>
 
+        <p class="hero-lede" data-load>
+          Applied AI engineer. I build next to the people who will use it, and test it like a QA lead.
+        </p>
+
+        <p class="hero-text" data-load>
+          I take AI work from a messy requirement to something a team can run:
+          models, LLM features and the app around them. I hold a master's in
+          Artificial Intelligence from Yeshiva University and spent two years in
+          software testing at VOIS.
+        </p>
+
+        <div class="hero-actions" data-load>
+          <a class="btn btn-primary" href="#contact">Start a project</a>
+          <a class="btn" href="https://www.linkedin.com/in/jainam-bhansali/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/bhansalijainam" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <p class="hero-hint" data-load aria-hidden="true">
+        <span class="hint-line"></span>
+        Scroll to step the optimizer downhill
+      </p>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap about">
+        <div class="about-copy">
+          <p class="label" data-reveal>About</p>
+          <h2 class="h2" data-reveal>I learned software by trying to break it. Now I build AI that has to hold up for a customer.</h2>
+          <p class="body-lg" data-reveal>
+            Two years in QA at VOIS put me close to requirements, releases and the
+            people waiting on them. My master's added the modeling side: neural
+            networks, NLP and fine-tuning large language models for better
+            performance and cheaper deployment. I'm looking for forward deployed
+            and applied AI roles, and I take freelance projects.
+          </p>
+
+          <dl class="facts" data-reveal>
+            <div>
+              <dt>Degree</dt>
+              <dd>M.S. Artificial Intelligence, Yeshiva University</dd>
+            </div>
+            <div>
+              <dt>Industry</dt>
+              <dd>2+ years in software QA at VOIS</dd>
+            </div>
+            <div>
+              <dt>Available for</dt>
+              <dd>Full-time roles and freelance projects</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="portrait" data-reveal data-tilt>
+          <div class="portrait-frame">
+            <span class="portrait-sun" aria-hidden="true"></span>
+            <span class="portrait-orbit" aria-hidden="true"></span>
+            <span class="portrait-spark portrait-spark-a" aria-hidden="true"></span>
+            <span class="portrait-spark portrait-spark-b" aria-hidden="true"></span>
+            <div class="portrait-figure">
+              <img src="./assets/images/portrait-toon.webp" alt="Illustrated portrait of Jainam Bhansali, smiling, in a pink checked shirt and round sunglasses" width="1440" height="1180" loading="lazy">
+              <span class="portrait-sheen" aria-hidden="true"></span>
+            </div>
+          </div>
+          <figcaption>fig. 1 <span>Jainam, Jersey City</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="wrap services">
+        <p class="label" data-reveal>How I work</p>
+        <h2 class="h2" data-reveal>Three ways to work with me</h2>
+
+        <div class="focus">
+          <article class="focus-item" data-reveal>
+            <p class="focus-tag">Forward deployed</p>
+            <h3 class="h3">Build next to the customer</h3>
+            <p>
+              I join your team or your customer's, turn a loose requirement into a
+              scoped build, and stay through rollout. Requirement analysis, test
+              design and defect management were my daily work at VOIS, and it
+              earned the Star Award.
+            </p>
+          </article>
+
+          <article class="focus-item" data-reveal>
+            <p class="focus-tag">Applied AI</p>
+            <h3 class="h3">Models that do a real job</h3>
+            <p>
+              Fine-tuned language models, NLP, computer vision and classic machine
+              learning, chosen for the problem. I evaluate against real data
+              before anything ships.
+            </p>
+          </article>
+
+          <article class="focus-item" data-reveal>
+            <p class="focus-tag">Freelance</p>
+            <h3 class="h3">Scoped projects, shipped</h3>
+            <p>
+              A prototype, a model, a data analysis or an AI feature inside a web
+              app. Python on the model side, TypeScript and JavaScript on the
+              product side, with a clear scope agreed up front.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="label" data-reveal>Projects</p>
+            <h2 class="h2" data-reveal>Selected work from GitHub</h2>
+          </div>
+          <a class="btn" data-reveal href="https://github.com/bhansalijainam?tab=repositories" target="_blank" rel="noopener">All repositories</a>
+        </div>
+
+        <div class="projects">
+          <a class="project project-lg" data-reveal data-tilt href="https://github.com/bhansalijainam/Lung-Segmentation-using-U-Net-A-Comparative-Study-on-CT-Images" target="_blank" rel="noopener">
+            <p class="project-top"><span class="project-tag">Computer vision</span><span class="project-arrow" aria-hidden="true">↗</span></p>
+            <h3 class="h3">Lung segmentation with U-Net</h3>
+            <p class="project-text">A comparative study of U-Net models for segmenting lungs in CT images.</p>
+            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
+          </a>
+          <a class="project project-lg" data-reveal data-tilt href="https://github.com/bhansalijainam/Stall-Number-Detection-of-Cows-using-a-Pre-trained-ResNet50-Model" target="_blank" rel="noopener">
+            <p class="project-top"><span class="project-tag">Computer vision</span><span class="project-arrow" aria-hidden="true">↗</span></p>
+            <h3 class="h3">Cow stall number detection</h3>
+            <p class="project-text">Detecting the stall numbers of cows with a pre-trained ResNet50 model.</p>
+            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
+          </a>
+          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/bike-demand-prediction" target="_blank" rel="noopener">
+            <p class="project-top"><span class="project-tag">Forecasting</span><span class="project-arrow" aria-hidden="true">↗</span></p>
+            <h3 class="h3">Bike demand prediction</h3>
+            <p class="project-text">A machine learning model that forecasts daily bike-sharing demand from weather, seasonality and user behavior.</p>
+            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
+          </a>
+          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/housing-price-regression-model" target="_blank" rel="noopener">
+            <p class="project-top"><span class="project-tag">Regression</span><span class="project-arrow" aria-hidden="true">↗</span></p>
+            <h3 class="h3">Housing price regression</h3>
+            <p class="project-text">A regression model that predicts Australian housing prices to guide real estate investment.</p>
+            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
+          </a>
+          <a class="project " data-reveal data-tilt href="https://github.com/bhansalijainam/lead-conversion-predictor" target="_blank" rel="noopener">
+            <p class="project-top"><span class="project-tag">Classification</span><span class="project-arrow" aria-hidden="true">↗</span></p>
+            <h3 class="h3">Lead conversion predictor</h3>
+            <p class="project-text">A logistic regression model that finds high-potential leads in a marketing funnel from behavioral and source data.</p>
+            <p class="project-meta"><span class="lang-dot"></span>Jupyter Notebook<span class="sep">/</span>Updated 2025</p>
+          </a>
+        </div>
+
+        <div class="repos" data-reveal>
+          <h3 class="kit-title">More repositories</h3>
+          <ul class="repo-list">
+            <li><a href="https://github.com/bhansalijainam/tax-companion-ai" target="_blank" rel="noopener"><span class="repo-name">tax-companion-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2026</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/Neural-project" target="_blank" rel="noopener"><span class="repo-name">Neural-project</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2026</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/finzen-spark-ai-lens" target="_blank" rel="noopener"><span class="repo-name">finzen-spark-ai-lens</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/financeflow" target="_blank" rel="noopener"><span class="repo-name">financeflow</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/expensemanager" target="_blank" rel="noopener"><span class="repo-name">expensemanager</span><span class="repo-lang">JavaScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/murmur-ai" target="_blank" rel="noopener"><span class="repo-name">murmur-ai</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/DraftFlo" target="_blank" rel="noopener"><span class="repo-name">DraftFlo</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/hireai-spark" target="_blank" rel="noopener"><span class="repo-name">hireai-spark</span><span class="repo-lang">TypeScript</span><span class="repo-year">2025</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/chat-bot" target="_blank" rel="noopener"><span class="repo-name">chat-bot</span><span class="repo-lang">Jupyter Notebook</span><span class="repo-year">2024</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/bhansalijainam/VETGPT" target="_blank" rel="noopener"><span class="repo-name">VETGPT</span><span class="repo-lang">Python</span><span class="repo-year">2024</span><span class="repo-arrow" aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PATH -->
+    <section class="section" id="path">
+      <div class="wrap">
+        <p class="label" data-reveal>Path</p>
+        <h2 class="h2" data-reveal>Education and experience</h2>
+
+        <ol class="path-list" id="path-list">
+
+          <li class="path-item" data-reveal>
+            <p class="path-when">Sep 2023<span>to</span>Dec 2024</p>
+            <div class="path-body">
+              <p class="path-kind">Education</p>
+              <h3 class="h3">M.S. in Artificial Intelligence</h3>
+              <p class="path-where">Yeshiva University <span>New York, NY</span></p>
+              <p>
+                Specialized in neural networks, NLP and applied AI. My main project
+                was fine-tuning large language models, improving both performance and
+                deployment efficiency.
+              </p>
+            </div>
+          </li>
+
+          <li class="path-item" data-reveal>
+            <p class="path-when">Mar 2022<span>to</span>Dec 2022</p>
+            <div class="path-body">
+              <p class="path-kind">Education</p>
+              <h3 class="h3">Postgraduate program in Data Science</h3>
+              <p class="path-where">IIT Bangalore <span>Bangalore, India</span></p>
+              <p>
+                Business analytics, exploratory data analysis and core modeling
+                techniques, including logistic regression and decision trees, using
+                Python and Tableau.
+              </p>
+            </div>
+          </li>
+
+          <li class="path-item" data-reveal>
+            <p class="path-when">Aug 2020<span>to</span>Dec 2022</p>
+            <div class="path-body">
+              <p class="path-kind path-kind-work">Experience</p>
+              <h3 class="h3">Senior Executive, Software Testing</h3>
+              <p class="path-where">VOIS <span>Pune, India</span></p>
+              <ul class="path-points">
+                <li>Tested software as a senior test engineer for over two years.</li>
+                <li>Used Jira, Jenkins, TTWOS, ALM and SQL to streamline test cycles and protect release quality.</li>
+                <li>Ran requirement analysis, defect management and QA testing, from sanity and regression runs to test case design.</li>
+                <li>Received the Star Award for contributions that benefited the whole team.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="path-item" data-reveal>
+            <p class="path-when">Jul 2016<span>to</span>Sep 2020</p>
+            <div class="path-body">
+              <p class="path-kind">Education</p>
+              <h3 class="h3">B.Tech in Computer Science and Engineering</h3>
+              <p class="path-where">Vellore Institute of Technology <span>Chennai, India</span></p>
+              <p>
+                Data structures and algorithms, object-oriented programming, database
+                systems, large-scale data systems, machine learning, natural language
+                processing, operating systems and applied linear algebra.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- TOOLKIT -->
+    <section class="section" id="toolkit">
+      <div class="wrap">
+        <p class="label" data-reveal>Toolkit</p>
+        <h2 class="h2" data-reveal>What I work with</h2>
+
+        <div class="kit">
+
+          <div class="kit-group" data-reveal>
+            <h3 class="kit-title">Languages</h3>
+            <ul class="kit-list">
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/python.png" alt="" width="40" height="40" loading="lazy"></span>Python</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/sql.png" alt="" width="40" height="40" loading="lazy"></span>SQL</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/js.png" alt="" width="40" height="40" loading="lazy"></span>JavaScript</li>
+            </ul>
+          </div>
+
+          <div class="kit-group" data-reveal>
+            <h3 class="kit-title">Frameworks and libraries</h3>
+            <ul class="kit-list">
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/pytorch.png" alt="" width="40" height="40" loading="lazy"></span>PyTorch</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/tensorflow.png" alt="" width="40" height="40" loading="lazy"></span>TensorFlow</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/huggingface.png" alt="" width="40" height="40" loading="lazy"></span>Hugging Face</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/numpy.png" alt="" width="40" height="40" loading="lazy"></span>NumPy</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/pandas.png" alt="" width="40" height="40" loading="lazy"></span>Pandas</li>
+            </ul>
+          </div>
+
+          <div class="kit-group" data-reveal>
+            <h3 class="kit-title">Data and web</h3>
+            <ul class="kit-list">
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/postgressql.png" alt="" width="40" height="40" loading="lazy"></span>PostgreSQL</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/mysql.png" alt="" width="40" height="40" loading="lazy"></span>MySQL</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/tableau.svg" alt="" width="40" height="40" loading="lazy"></span>Tableau</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/html.png" alt="" width="40" height="40" loading="lazy"></span>HTML</li>
+              <li class="tile" data-tilt><span class="tile-icon"><img src="./assets/images/css-3.png" alt="" width="40" height="40" loading="lazy"></span>CSS</li>
+            </ul>
+          </div>
+
+          <div class="kit-group" data-reveal>
+            <h3 class="kit-title">Testing and delivery</h3>
+            <p class="kit-plain">Jira <span>/</span> Jenkins <span>/</span> ALM <span>/</span> TTWOS <span>/</span> Regression and sanity testing <span>/</span> Test case design <span>/</span> Defect management</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section-contact" id="contact">
+      <div class="wrap contact">
+        <div class="contact-copy">
+          <p class="label" data-reveal>Contact</p>
+          <h2 class="h2 h2-xl" data-reveal>Let's build.</h2>
+          <p class="body-lg" data-reveal>
+            I'm open to forward deployed engineer and applied AI roles, and to
+            freelance projects. Tell me what you're trying to ship and I'll reply
+            with how I'd approach it.
+          </p>
+
+          <ul class="contact-list" data-reveal>
+            <li>
+              <span>Email</span>
+              <a href="mailto:jbhansal@mail.yu.edu">jbhansal@mail.yu.edu</a>
+            </li>
+            <li>
+              <span>Phone</span>
+              <a href="tel:+15512608817">+1 (551) 260-8817</a>
+            </li>
+            <li>
+              <span>Based in</span>
+              <address>Jersey City, NJ, USA</address>
+            </li>
+            <li>
+              <span>Elsewhere</span>
+              <span class="contact-social">
+                <a href="https://www.linkedin.com/in/jainam-bhansali/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/bhansalijainam" target="_blank" rel="noopener">GitHub</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="form" data-reveal target="_blank"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSei8E1bL8hY4vc9cAr3eOTFON0dvtRPg6bi_RLJKWM2v6S1Kw/viewform">
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input id="f-name" type="text" name="entry.1325375650" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email address</label>
+            <input id="f-email" type="email" name="entry.45159176" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-msg">What are you trying to build?</label>
+            <textarea id="f-msg" name="entry.2104378170" rows="5" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Continue to send</button>
+          <p class="form-note">Opens a Google Form with your message filled in. Submit it there to send.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© <span id="year">2026</span> Jainam Bhansali</p>
+      <p class="footer-note">The terrain behind this page is a loss surface. Scrolling moves the optimizer from a loss of 2.303 down to its minimum.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
+
 </html>
