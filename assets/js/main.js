@@ -90,7 +90,7 @@ if (finePointer.matches && !reduceMotion.matches) {
   document.querySelectorAll('[data-tilt]').forEach((el) => {
     const isPortrait = el.classList.contains('portrait');
     const target = isPortrait ? el.querySelector('.portrait-frame') : el;
-    const strength = isPortrait ? 7 : 14;
+    const strength = isPortrait ? 7 : el.classList.contains('project') ? 5 : 14;
 
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();
@@ -99,6 +99,8 @@ if (finePointer.matches && !reduceMotion.matches) {
       target.style.setProperty('--ry', `${(x * strength).toFixed(2)}deg`);
       target.style.setProperty('--rx', `${(-y * strength).toFixed(2)}deg`);
       if (isPortrait) target.style.setProperty('--px', `${(-x * 14).toFixed(1)}px`);
+      target.style.setProperty('--mx', `${((x + 0.5) * 100).toFixed(1)}%`);
+      target.style.setProperty('--my', `${((y + 0.5) * 100).toFixed(1)}%`);
     });
     el.addEventListener('pointerleave', () => {
       target.style.setProperty('--ry', '0deg');
